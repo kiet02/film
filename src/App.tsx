@@ -1,7 +1,9 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {fetchApi} from './utils/modules/FetchApi/FetchApi';
+
 import {useQuery} from '@tanstack/react-query';
+import {useRoute} from '@react-navigation/native';
+import {fetchApi} from './utils/modules';
 
 const App = () => {
   const {data, isLoading, error} = useQuery({
@@ -9,8 +11,7 @@ const App = () => {
     queryFn: fetchApi.login,
   });
 
-  // Log trạng thái của query
-  console.log('Query State:', {isLoading, error, data});
+  const router = useRoute();
 
   if (isLoading) {
     return (
@@ -19,7 +20,6 @@ const App = () => {
       </View>
     );
   }
-
   if (error) {
     console.log('Error occurred:', error.message); // Log chi tiết lỗi
     return (
@@ -36,6 +36,7 @@ const App = () => {
       <Text style={styles.text}>
         Avatar Hash: {data?.avatar?.gravatar?.hash || 'N/A'}
       </Text>
+      <Text style={styles.text}>ID: {router.params.id}</Text>
     </View>
   );
 };
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    color: 'white',
+    color: 'black',
   },
 });
 export {App};
