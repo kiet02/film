@@ -12,6 +12,7 @@ export type AllScreenStackParamList = {
   Home: undefined;
   MainApp: {id: number};
   MainHome: {id: number};
+  Login: undefined;
 };
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
   NativeStackScreenProps<RootStackParamList, T>;

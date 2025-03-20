@@ -62,7 +62,7 @@ export function IntroScreen() {
 
   return (
     <Animated.View style={[styles.container, animatedBackGroundStyle]}>
-      {/* <Animated.Image
+      <Animated.Image
         style={[styles.image, animaredImageStyle]}
         source={{
           uri: 'https://e1.pngegg.com/pngimages/116/721/png-clipart-macos-app-icons-arduino.png',
@@ -75,7 +75,7 @@ export function IntroScreen() {
       <AnimatedTextInput
         placeholder="password"
         style={[styles.input, passInputStyle]}
-      /> */}
+      />
       <LottieView
         ref={animationRef}
         source={require('/Users/mn20/Desktop/sds/film/src/utils/image/Animation - 1742292983807.json')}
