@@ -1,14 +1,20 @@
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import React from 'react';
-
-import {App} from './src/App';
+import {AppNavigation} from './src/navigation/AppNavigation';
+import {NavigationContainer} from '@react-navigation/native';
+import {FormProvider, useForm} from 'react-hook-form';
 
 const queryClient = new QueryClient();
 
 const AppProvider = () => {
+  const methods = useForm();
   return (
     <QueryClientProvider client={queryClient}>
-      <App />
+      <FormProvider {...methods}>
+        <NavigationContainer>
+          <AppNavigation />
+        </NavigationContainer>
+      </FormProvider>
     </QueryClientProvider>
   );
 };
