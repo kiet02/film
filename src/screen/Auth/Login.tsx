@@ -3,12 +3,18 @@ import {Sizes} from '../../utils/resource/size';
 import {AnimatedTextInput} from './item/AnimatedTextInput';
 import {AnimatedButton} from './item/AnimatedButton';
 import {useFormContext} from 'react-hook-form';
+import {useNavigation} from '@react-navigation/native';
+import {MainScreenParamList} from '../../utils';
 
 export type TLoginForm = {email: string; password: string};
 
 export default function Login() {
   const {control, handleSubmit} = useFormContext<TLoginForm>();
-  const onSubmit = ({email, password}: TLoginForm) => {};
+  const navigation = useNavigation<MainScreenParamList<'Home'>['navigation']>();
+
+  const onSubmit = ({email, password}: TLoginForm) => {
+    navigation.navigate('HomeScreen');
+  };
 
   return (
     <View style={Style.main}>
@@ -21,6 +27,7 @@ export default function Login() {
         name="email"
         duration={500}
         label="Email :"
+        inputStyle={{marin: 10}}
       />
       <AnimatedTextInput
         control={control}
@@ -28,7 +35,10 @@ export default function Login() {
         duration={700}
         label="Password :"
       />
-      <AnimatedButton duration={900} onPressLogin={handleSubmit(onSubmit)} />
+      <AnimatedButton
+        duration={900}
+        onPressLogin={() => navigation.navigate('tab')}
+      />
     </View>
   );
 }
