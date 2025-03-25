@@ -7,10 +7,12 @@ import {
   TextStyle,
   ViewStyle,
   TextInputProps,
+  View,
 } from 'react-native';
 import {AppLabel} from '../AppLabel/AppLabel';
 import Animated from 'react-native-reanimated';
 import {Controller, UseControllerProps} from 'react-hook-form';
+import Icon from 'react-native-vector-icons/Octicons';
 
 type TAppInputText = UseControllerProps &
   Omit<TextInputProps, 'style' | 'defaultValue'> & {
@@ -22,6 +24,9 @@ type TAppInputText = UseControllerProps &
     containerLabel?: StyleProp<ViewStyle>;
     labelStyle?: StyleProp<TextStyle>;
     defaultValue?: string;
+    renderLeft?: () => void;
+    renderRight?: () => void;
+    icon?: string;
   };
 
 export function AppInputText({
@@ -38,7 +43,9 @@ export function AppInputText({
   ...TextInputProps
 }: TAppInputText) {
   const onChangeText = (onChange: (...event: any[]) => void) => (e: string) => {
-    if (e.startsWith(' ')) return; // Ngăn nhập khoảng trắng đầu
+    if (e.startsWith(' ')) {
+      return;
+    }
     onChange(e);
   };
 
@@ -59,26 +66,32 @@ export function AppInputText({
               labelStyle={labelStyle}
             />
           )}
-          <TextInput
-            {...TextInputProps}
-            value={value} // value luôn là chuỗi
-            onChangeText={onChangeText(onChange)}
-            style={[
-              {
-                padding: 10,
-                width: 350,
-                height: 50,
-                marginBottom: 20,
-                borderRadius: 10,
-                backgroundColor: 'white',
-                elevation: 1,
-                color: 'black',
-                marginTop: 5,
-              },
-              textStyle,
-              inputStyle,
-            ]}
-          />
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Icon name="search" size={20} />
+            <TextInput
+              {...TextInputProps}
+              value={value} // value luôn là chuỗi
+              onChangeText={onChangeText(onChange)}
+              style={[
+                {
+                  padding: 10,
+                  width: 350,
+                  height: 50,
+                  borderRadius: 10,
+                  backgroundColor: 'white',
+                  elevation: 1,
+                  color: 'black',
+                },
+                textStyle,
+                inputStyle,
+              ]}
+            />
+          </View>
         </Animated.View>
       )}
     />

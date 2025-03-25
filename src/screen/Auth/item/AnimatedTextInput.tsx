@@ -44,7 +44,7 @@ export function AnimatedTextInput({
     <AnimatedTI
       label={label}
       placeholder="Enter your email"
-      containerStyle={[{alignSelf: 'center'}, inputStyle]}
+      containerStyle={[{alignSelf: 'center', margin: 10}, inputStyle]}
       control={control}
       name={name}
       rules={{required: true}} // Ví dụ: validation
