@@ -39,7 +39,7 @@ export function ListExplore() {
     },
   ];
   return (
-    <View style={{height: Sizes.height(20)}}>
+    <View style={{height: Sizes.height(20), marginBottom: Sizes.wpx(20)}}>
       <FlatList
         data={data}
         horizontal
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     width: Sizes.width(80),
     height: Sizes.height(15),
     backgroundColor: Colors.light.explore.item,
-    margin: 10,
+    margin: Sizes.wpx(10),
     borderRadius: 15,
     alignItems: 'center',
     flexDirection: 'row',
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     width: Sizes.width(23),
     height: Sizes.height(12),
     backgroundColor: 'yellow',
-    margin: 15,
+    margin: Sizes.wpx(15),
     borderRadius: 10,
   },
 });

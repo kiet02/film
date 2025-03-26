@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {View} from 'react-native';
 import {Categories} from './item/Categories';
@@ -18,14 +19,13 @@ export function HomeScreen() {
       <HomeHeader />
       <AppText
         styleText={{fontSize: 30, fontWeight: 'bold'}}
-        styleContainer={{width: Sizes.width(95)}}
+        styleContainer={{width: Sizes.width(95), marginTop: Sizes.wpx(20)}}
         text="Categories"
       />
-
       <Categories />
       <AppText
         styleText={{fontSize: 30, fontWeight: 'bold'}}
-        styleContainer={{width: Sizes.width(95)}}
+        styleContainer={{width: Sizes.width(95), marginTop: Sizes.wpx(30)}}
         text="Explore"
       />
       <ListExplore />

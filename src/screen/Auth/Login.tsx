@@ -9,12 +9,12 @@ import {MainScreenParamList} from '../../utils';
 export type TLoginForm = {email: string; password: string};
 
 export default function Login() {
-  const {control, handleSubmit} = useFormContext<TLoginForm>();
+  const {control} = useFormContext<TLoginForm>();
   const navigation = useNavigation<MainScreenParamList<'Home'>['navigation']>();
 
-  const onSubmit = ({email, password}: TLoginForm) => {
-    navigation.navigate('HomeScreen');
-  };
+  // const onSubmit = ({email, password}: TLoginForm) => {
+  //   navigation.navigate('HomeScreen');
+  // };
 
   return (
     <View style={Style.main}>
@@ -27,7 +27,6 @@ export default function Login() {
         name="email"
         duration={500}
         label="Email :"
-        inputStyle={{marin: 10}}
       />
       <AnimatedTextInput
         control={control}

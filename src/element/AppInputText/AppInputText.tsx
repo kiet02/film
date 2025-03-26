@@ -12,8 +12,8 @@ import {
 import {AppLabel} from '../AppLabel/AppLabel';
 import Animated from 'react-native-reanimated';
 import {Controller, UseControllerProps} from 'react-hook-form';
-import Icon from 'react-native-vector-icons/Octicons';
-
+import Icon from './item/IconTextInput';
+import {icons} from 'lucide-react-native';
 type TAppInputText = UseControllerProps &
   Omit<TextInputProps, 'style' | 'defaultValue'> & {
     label?: string;
@@ -24,9 +24,9 @@ type TAppInputText = UseControllerProps &
     containerLabel?: StyleProp<ViewStyle>;
     labelStyle?: StyleProp<TextStyle>;
     defaultValue?: string;
-    renderLeft?: () => void;
-    renderRight?: () => void;
-    icon?: string;
+    renderLeft?: boolean;
+    renderRight?: boolean;
+    icon?: keyof typeof icons;
   };
 
 export function AppInputText({
@@ -40,6 +40,9 @@ export function AppInputText({
   name,
   control,
   rules,
+  renderLeft = true,
+  renderRight,
+  icon,
   ...TextInputProps
 }: TAppInputText) {
   const onChangeText = (onChange: (...event: any[]) => void) => (e: string) => {
@@ -67,15 +70,22 @@ export function AppInputText({
             />
           )}
           <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Icon name="search" size={20} />
+            style={[
+              {
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: 'red',
+                paddingHorizontal: 10,
+                borderRadius: 10,
+              },
+              inputStyle,
+            ]}>
+            {renderLeft ? <Icon name={icon} size={20} color={'black'} /> : null}
+
             <TextInput
               {...TextInputProps}
-              value={value} // value luôn là chuỗi
+              value={value}
               onChangeText={onChangeText(onChange)}
               style={[
                 {
@@ -88,9 +98,11 @@ export function AppInputText({
                   color: 'black',
                 },
                 textStyle,
-                inputStyle,
               ]}
             />
+            {renderRight ? (
+              <Icon name={icon} size={20} color={'black'} />
+            ) : null}
           </View>
         </Animated.View>
       )}

@@ -1,32 +1,54 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {Sizes} from '../../../utils/resource/size';
 import {Colors} from '../../../utils/resource/color';
+import {AppText} from '../../../element/AppText';
 
 export function Categories() {
   return (
     <View style={styles.container}>
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <View style={styles.styleClassic}>
-          <Text>Classic</Text>
+          <AppText
+            text="Classic"
+            styleText={{fontSize: 20, fontWeight: 'bold'}}
+          />
         </View>
         <View style={styles.styleFiction}>
-          <Text>Fiction</Text>
+          <AppText
+            text="Fiction"
+            styleText={{fontSize: 20, fontWeight: 'bold'}}
+          />
         </View>
       </View>
 
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <View style={styles.styleBestSellers}>
-          <Text style={{transform: [{rotate: '-90deg'}]}}>Best Sellers</Text>
+          <AppText
+            text="Best Sellers"
+            styleText={{
+              width: '100%',
+              height: Sizes.wpx(25),
+              fontWeight: 'bold',
+              fontSize: 20,
+              transform: [{rotate: '-90deg'}],
+            }}
+          />
         </View>
 
         <View style={{justifyContent: 'space-between'}}>
           <View style={styles.styleCareer}>
-            <Text>Career & Success</Text>
+            <AppText
+              text="Career & Success"
+              styleText={{fontSize: 20, fontWeight: 'bold'}}
+            />
           </View>
           <View style={styles.styleMore}>
-            <Text>More</Text>
+            <AppText
+              text="More ->"
+              styleText={{fontSize: 20, fontWeight: 'bold'}}
+            />
           </View>
         </View>
       </View>
@@ -80,4 +102,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  text: {},
 });

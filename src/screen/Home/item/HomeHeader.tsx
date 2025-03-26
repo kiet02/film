@@ -1,5 +1,6 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import {AppInputText} from '../../../element';
 import {useFormContext} from 'react-hook-form';
 import {Sizes} from '../../../utils/resource/size';
@@ -14,11 +15,14 @@ export function HomeHeader() {
         control={control}
         name="search"
         placeholder="Search"
+        icon="Search"
         placeholderTextColor={'black'}
         inputStyle={{
           backgroundColor: Colors.light.explore.item,
           width: Sizes.width(95),
-          borderRadius: 100,
+        }}
+        textStyle={{
+          backgroundColor: Colors.light.explore.item,
         }}
       />
     </View>
