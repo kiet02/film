@@ -56,7 +56,7 @@ export function Categories() {
           titileStyle={{fontSize: 20, fontWeight: 'bold',color: 'black',backgroundColor: Colors.light.categories.more}}
           title='All'
           TouchableType='TouchableOpacity'
-          onPress={() => navigation.navigate('Categories', {name: 'All'})}
+          onPress={() => navigation.navigate('AllCategories', {name: 'All'})}
           />
           
           

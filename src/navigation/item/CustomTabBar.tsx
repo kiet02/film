@@ -2,8 +2,9 @@ import React from 'react';
 import {View, TouchableOpacity, StyleSheet} from 'react-native';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {Sizes} from '../../utils/resource/size';
-import Icon from './CustomTabBarIcon';
+
 import { icons } from 'lucide-react-native';
+import Icon from '../../element/AppButton/AppIcon';
 const CustomTabBar: React.FC<BottomTabBarProps> = ({state, navigation}) => {
 
   return (

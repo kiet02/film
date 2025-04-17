@@ -32,6 +32,7 @@ export type TGenre = {
   name: string;
   createdAt: string;
   updatedAt: string;
+  Books: TBook
 }
 
 export type TBook = [{

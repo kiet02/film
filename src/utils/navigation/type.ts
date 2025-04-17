@@ -18,6 +18,7 @@ export type AllScreenStackParamList = {
   tab: undefined;
   Register: undefined;
   Categories: {name:string};
+  AllCategories: {name:string}
 };
 
 export type TabBottomStackParam = {

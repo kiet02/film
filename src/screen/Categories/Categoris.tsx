@@ -1,54 +1,76 @@
-import React from 'react';
-import {View, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
-import {AppText} from '../../element/AppText';
-import {useQuery} from '@tanstack/react-query';
-import {fetchApi} from '../../utils/modules';
-import {useNavigation} from '@react-navigation/native';
+import React, { useEffect } from 'react';
+import {
+  View,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
+import { AppText } from '../../element/AppText';
+import { useQuery } from '@tanstack/react-query';
+import { fetchApi } from '../../utils/modules';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { useCategories } from './module/useCategories';
+import { RootStackParamList, RootStackScreenProps } from '../../utils';
+import { Sizes } from '../../utils/resource/size';
+import Icon from '../../element/AppButton/AppIcon';
+import { CategoriesHeader } from './item/CategoriesHeader';
 
 type Category = {
   id: string;
   name: string;
+  imageUrl: string;
+  author: string;
 };
 
 export const Categories = () => {
   const navigation = useNavigation();
-//   const {data: categories, isLoading} = useQuery({
-//     queryKey: ['categories'],
-//     queryFn: fetchApi.getCategories,
-//   });
+  const route = useRoute<RootStackScreenProps<'Categories'>['route']>();
+  const name = route.params.name;
+  const { data, isLoading } = useCategories(name);
 
-  const renderItem = ({item}: {item: Category}) => (
-    <TouchableOpacity
-      style={styles.categoryCard}
-    //   onPress={() => navigation.navigate('BookList', {categoryId: item.id})}
-      >
-      <AppText text={item.name} style={styles.categoryName} />
-      <AppText
-    //    text={item.description}
-       style={styles.categoryDescription} />
-      <AppText
-        // text={`${item.bookCount} books`}
-        style={styles.categoryBookCount}
-      />
+  const renderItem = ({ item }: { item: Category }) => (
+    <TouchableOpacity style={styles.categoryCard}>
+      <View style={styles.rowContainer}>
+        <Image
+          source={{ uri: item.imageUrl }}
+          style={styles.bookCover}
+          resizeMode="cover"
+        />
+        <View style={styles.bookInfo}>
+          <AppText text={item.name} style={styles.categoryName} />
+          <AppText text={item.author} style={styles.authorName} />
+          <AppText text="View details >" style={styles.viewDetail} />
+        </View>
+      </View>
     </TouchableOpacity>
   );
 
-//   if (isLoading) {
-//     return (
-//       <View style={styles.container}>
-//         <AppText text="Loading..." style={styles.loadingText} />
-//       </View>
-//     );
-//   }
-
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <AppText text="Loading..." style={styles.loadingText} />
+      </View>
+    );
+  }
+  console.log(data?.Books.length);
   return (
     <View style={styles.container}>
-      {/* <FlatList
-        data={categories}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        contentContainerStyle={styles.listContainer}
-      /> */}
+      <CategoriesHeader name={name} onPress={() => navigation.goBack()} />
+      {!data?.Books?.length ? (
+        <View
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+        >
+          <AppText text="No books found in this category" />
+        </View>
+      ) : (
+        <FlatList
+          data={data?.Books as unknown as ArrayLike<Category>}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          contentContainerStyle={styles.listContainer}
+        />
+      )}
     </View>
   );
 };
@@ -63,23 +85,46 @@ const styles = StyleSheet.create({
   },
   categoryCard: {
     backgroundColor: 'white',
-    borderRadius: 8,
+    borderRadius: 12,
     padding: 16,
     marginBottom: 12,
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    marginHorizontal: 8,
+  },
+  rowContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  bookCover: {
+    width: 80,
+    height: 120,
+    borderRadius: 8,
+    marginRight: 12,
+  },
+  bookInfo: {
+    flex: 1,
+    justifyContent: 'space-between',
   },
   categoryName: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#333',
     marginBottom: 8,
+  },
+  authorName: {
+    fontSize: 14,
+    color: '#666',
+    marginVertical: 4,
+  },
+  infoContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginTop: 8,
+  },
+  viewDetail: {
+    fontSize: 14,
+    color: '#666',
+    fontStyle: 'italic',
   },
   categoryDescription: {
     fontSize: 14,

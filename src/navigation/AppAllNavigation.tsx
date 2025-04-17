@@ -5,6 +5,7 @@ import {AppBottomTab} from './AppBottomTab';
 import Register from '../screen/Register/Register';
 import Login from '../screen/Login/Login';
 import { Categories } from '../screen/Categories/Categoris';
+import AllCategories from '../screen/AllCategories/AllCategories';
 
 
 export function AppAllNavigation() {
@@ -29,6 +30,11 @@ export function AppAllNavigation() {
       <Stack.Screen
         name="Categories"
         component={Categories}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="AllCategories"
+        component={AllCategories}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
