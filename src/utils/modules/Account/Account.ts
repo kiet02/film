@@ -1,4 +1,5 @@
-import {MMKVLoader, useMMKVStorage} from 'react-native-mmkv-storage';
+
+import { MMKVLoader, useMMKVStorage } from 'react-native-mmkv-storage';
 import {TProfileResponse} from '../FetchApi';
 
 const tag = 'account';
@@ -7,9 +8,9 @@ const mmkv_key = `key-${tag}`;
 
 const MMKVwithID = new MMKVLoader().withInstanceID(mmkv_id).initialize();
 
-type Account = TProfileResponse & {token?: string};
+type Account = TProfileResponse & {email?:string,token?: string};
 
-const AccountService = {
+export const AccountService = {
   get: () => MMKVwithID.getMap<Account | undefined>(mmkv_key),
   add: (value: Partial<Account>) =>
     MMKVwithID.setMap(mmkv_key, {...AccountService.get(), ...value}),

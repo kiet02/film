@@ -9,6 +9,7 @@ export type TProfileResponse = {
   userame: string;
 };
 export type TUser = {
+  email: any;
   username: string;
   id: string;
   avatar: {
@@ -16,4 +17,34 @@ export type TUser = {
       hash: string;
     };
   };
+  token: string;
+  message: string;
+  status: number;
 };
+export type TAuthor ={
+  id: number;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+}
+export type TGenre = {
+  id: number;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type TBook = [{
+        id: number,
+        name: string,
+        img: string,
+        describe:string,
+        createdAt:string,
+        updatedAt:string,
+        authorId: number,
+        genreId: number,
+        Author: TAuthor
+        Genre: TGenre
+  }]
+
+      

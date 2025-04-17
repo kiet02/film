@@ -1,30 +1,75 @@
+import { AccountService } from '../Account';
 import {Apis} from '../Apis';
-import {TUser} from './types';
+import {TBook, TUser} from './types';
 
-const token =
-  'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlNDNkYjBmMmUwZjk0OTQwYzg1OTFlOWQ5NDMyNWIwOSIsIm5iZiI6MTc0MTc0OTIxMy44NDMwMDAyLCJzdWIiOiI2N2QwZmJkZDY2ODkyYmFkNjI4MTRkMTQiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.m8GiDHysJNqY9mj0fnjyAAfZxKNwONugTJc7gHG9n7s';
 
-const commonCall = async <T>(api: string, option: ResponseInit): Promise<T> => {
-  const response = await fetch(api, option);
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
+const commonCall = async <T>(api: string, option: RequestInit={}): Promise<T> => {
+  const account = AccountService.get()
+  
+  try {
+    // if(!account?.token) {
+    //   throw new Error('Account not found')
+    // }
+    
+    let headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${account?.token}`,
+    };
+  
+    const response = await fetch(api, {
+      headers: headers,
+      ...option
+
+    });
+   
+
+    return response.json();
+  } catch (error:any) {
+    if (error.message === 'Network request failed') {
+      throw new Error('Network request failed');
+    }
+    throw error;
   }
-  console.log(response);
-  return response.json();
+
+ 
 };
 
 const fetchApi = {
-  login: () => {
+  login: (email:string,password:string) => {
+    const option: RequestInit = {
+      method: 'POST',
+      body: JSON.stringify({email,password})
+    }
+    const response = commonCall<TUser>(Apis.login, option);
+    return response;
+  },
+  register: (name:string,email:string,password:string) => {
+    const option: RequestInit = {
+      method: 'POST',
+      body: JSON.stringify({name,email,password})
+    }
+    const response = commonCall<TUser>(Apis.register, option);
+    return response;
+  },
+  explore:  () => {
     const option: RequestInit = {
       method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    const response = commonCall<TUser>(Apis.login, option);
+    }
+    const response = commonCall<TBook>(Apis.getExplore, option);
+    return response;
+  },
+  Categories:  (name:string) => {
+    const option: RequestInit = {
+      method: 'GET',
+    }
+    const response = commonCall<TBook>(Apis.getCategoris(name), option);
     return response;
   },
 };
 
-export {fetchApi};
+const ApiKeys = {
+  login: 'login',
+  register: 'register',
+  explore: 'explore',
+};
+export {fetchApi,ApiKeys};

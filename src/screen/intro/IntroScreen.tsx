@@ -70,11 +70,11 @@ export function IntroScreen() {
       />
       <AnimatedTextInput
         placeholder="user"
-        style={[styles.input, userInputStyle]}
+        style={[styles.input,]}
       />
       <AnimatedTextInput
         placeholder="password"
-        style={[styles.input, passInputStyle]}
+        style={[styles.input]}
       />
       <LottieView
         ref={animationRef}

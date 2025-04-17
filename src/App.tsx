@@ -36,7 +36,7 @@ const App = () => {
       <Text style={styles.text}>
         Avatar Hash: {data?.avatar?.gravatar?.hash || 'N/A'}
       </Text>
-      <Text style={styles.text}>ID: {router.params.id}</Text>
+      {/* <Text style={styles.text}>ID: {router.params.id}</Text> */}
     </View>
   );
 };

@@ -2,9 +2,9 @@ import React from 'react';
 import {View, TouchableOpacity, StyleSheet} from 'react-native';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {Sizes} from '../../utils/resource/size';
-import Icon from 'react-native-vector-icons/Entypo';
+import Icon from './CustomTabBarIcon';
+import { icons } from 'lucide-react-native';
 const CustomTabBar: React.FC<BottomTabBarProps> = ({state, navigation}) => {
-  //bookmark ,home, user
 
   return (
     <View style={styles.tabBar}>
@@ -31,7 +31,7 @@ const CustomTabBar: React.FC<BottomTabBarProps> = ({state, navigation}) => {
             onPress={onPress}
             style={[styles.tabItem, isFocused && styles.tabItemFocused]}>
             <Icon
-              name={iconName}
+              name={route.name as keyof typeof icons}
               size={24}
               color={isFocused ? 'white' : '#666'}
             />

@@ -3,8 +3,8 @@ const Colors = {
     categories: {
       BSell: '#e3d6fb',
       classic: '#faded7',
-      fiction: '#f9f7da',
-      career: '#d8f2fb',
+      horror: '#f9f7da',
+      scienceFiction: '#d8f2fb',
       more: '#f7f7f7',
     },
     explore: {

@@ -5,6 +5,7 @@ export type RootStackParamList = {
   Home: undefined;
   MainApp: {id: number};
   MainHome: {id: number};
+  Categories: {name:string}
 };
 
 export type AllScreenStackParamList = {
@@ -15,16 +16,18 @@ export type AllScreenStackParamList = {
   Login: undefined;
   HomeScreen: undefined;
   tab: undefined;
+  Register: undefined;
+  Categories: {name:string};
 };
 
 export type TabBottomStackParam = {
-  Home: undefined;
+  House: undefined;
   MainApp: {id: number};
   MainHome: {id: number};
   Login: undefined;
   HomeScreen: undefined;
-  user: undefined;
-  bookmarks: undefined;
+  User: undefined;
+  Bookmark: undefined;
   home: undefined;
 };
 export type RootStackScreenProps<T extends keyof RootStackParamList> =

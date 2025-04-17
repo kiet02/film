@@ -10,20 +10,20 @@ export function AppBottomTab() {
   const Tab = createBottomTabNavigator<TabBottomStackParam>();
   return (
     <Tab.Navigator
-      initialRouteName="home"
+      initialRouteName="House"
       tabBar={props => <CustomTabBar {...props} />}>
       <Tab.Screen
-        name="home"
+        name="House"
         component={AppNavigation}
         options={{headerShown: false}}
       />
       <Tab.Screen
-        name="bookmarks"
+        name="Bookmark"
         component={BookSave}
         options={{headerShown: false}}
       />
       <Tab.Screen
-        name="user"
+        name="User"
         component={Account}
         options={{headerShown: false}}
       />

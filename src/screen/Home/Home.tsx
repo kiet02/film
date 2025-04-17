@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, { use } from 'react';
 import {View} from 'react-native';
 import {Categories} from './item/Categories';
 import {AppText} from '../../element/AppText';
@@ -14,7 +14,7 @@ export function HomeScreen() {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor: '#fcf3de',
       }}>
       <HomeHeader />
       <AppText

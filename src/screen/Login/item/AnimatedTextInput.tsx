@@ -18,6 +18,7 @@ type TAnimatedTextInput = {
   name: string;
   duration: number;
   label?: string;
+  secureTextEntry?: boolean;
 };
 
 export function AnimatedTextInput({
@@ -25,6 +26,7 @@ export function AnimatedTextInput({
   name,
   duration,
   label,
+  secureTextEntry = false
 }: TAnimatedTextInput) {
   const input = useSharedValue(0);
 
@@ -44,9 +46,10 @@ export function AnimatedTextInput({
     <AnimatedTI
       label={label}
       placeholder="Enter your email"
-      containerStyle={[{alignSelf: 'center', margin: 10}, inputStyle]}
+      containerStyle={[{alignSelf: 'center', margin: 10}, ]}
       control={control}
       name={name}
+      secureTextEntry={secureTextEntry}
       rules={{required: true}} // Ví dụ: validation
     />
   );

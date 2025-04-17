@@ -10,9 +10,9 @@ import {
 } from 'react-native-reanimated';
 import {AppButton, AppTextTouchable} from '../../../element';
 
-type TAnimatedButton = {duration: number; onPressLogin: () => void};
+type TAnimatedButton = {duration: number; onPressLogin: () => void,onPressRegister:() => void};
 
-export function AnimatedButton({duration, onPressLogin}: TAnimatedButton) {
+export function AnimatedButton({duration, onPressLogin,onPressRegister}: TAnimatedButton) {
   const button = useSharedValue(0);
 
   useEffect(() => {
@@ -27,16 +27,14 @@ export function AnimatedButton({duration, onPressLogin}: TAnimatedButton) {
   return (
     <View>
       <AppButton
-        title="Đăng nhập"
+        title="Login"
         TouchableType="TouchableOpacity"
-        ButtonStyle={{width: 200, alignSelf: 'center'}} // Sửa ButtonStyle thành style
-        onPress={onPressLogin} // Thêm onPress ví dụ
-        containerStyle={buttonStyle}
+        ButtonStyle={{width: 200, alignSelf: 'center'}}
+        onPress={onPressLogin}
       />
       <AppTextTouchable
-        text="Đăng kí tại đây"
-        onPress={() => console.log('Register pressed')}
-        containerStyle={buttonStyle}
+        text="Register here"
+        onPress={onPressRegister}
       />
     </View>
   );

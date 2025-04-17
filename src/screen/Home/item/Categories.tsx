@@ -4,52 +4,62 @@ import {View, StyleSheet} from 'react-native';
 import {Sizes} from '../../../utils/resource/size';
 import {Colors} from '../../../utils/resource/color';
 import {AppText} from '../../../element/AppText';
+import { AppButton } from '../../../element';
+import { useNavigation } from '@react-navigation/native';
+import { MainScreenParamList } from '../../../utils';
 
 export function Categories() {
+  const navigation = useNavigation<MainScreenParamList<"Categories">['navigation']>();
   return (
     <View style={styles.container}>
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-        <View style={styles.styleClassic}>
-          <AppText
-            text="Classic"
-            styleText={{fontSize: 20, fontWeight: 'bold'}}
-          />
-        </View>
-        <View style={styles.styleFiction}>
-          <AppText
-            text="Fiction"
-            styleText={{fontSize: 20, fontWeight: 'bold'}}
-          />
-        </View>
+        <AppButton 
+        title='Fantasy'
+        titileStyle={{fontSize: 20, fontWeight: 'bold',color: 'black',backgroundColor: Colors.light.categories.classic}} 
+        ButtonStyle={styles.styleClassic} 
+        TouchableType='TouchableOpacity' 
+        onPress={() => navigation.navigate('Categories', {name: 'Fantasy'})}
+        />
+        <AppButton 
+        title='Horror'
+        titileStyle={{fontSize: 20, fontWeight: 'bold',color: 'black',backgroundColor: Colors.light.categories.horror}} 
+        ButtonStyle={styles.styleHorror} 
+        TouchableType='TouchableOpacity' 
+        onPress={() => navigation.navigate('Categories', {name: 'Horror'})}
+        />
       </View>
 
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-        <View style={styles.styleBestSellers}>
-          <AppText
-            text="Best Sellers"
-            styleText={{
-              width: '100%',
-              height: Sizes.wpx(25),
-              fontWeight: 'bold',
-              fontSize: 20,
-              transform: [{rotate: '-90deg'}],
-            }}
-          />
-        </View>
+        <AppButton 
+        title='Adventure'
+        titileStyle={{ width: '120%',
+          height: Sizes.wpx(45),
+          fontWeight: 'bold',
+          fontSize: 20,
+          transform: [{rotate: '-90deg'}],color: 'black',backgroundColor: Colors.light.categories.BSell}}
+        ButtonStyle={styles.styleAventure}
+        TouchableType='TouchableOpacity'
+        onPress={() => navigation.navigate('Categories', {name: 'Adventure'})}
+        />
+          
+        
 
         <View style={{justifyContent: 'space-between'}}>
-          <View style={styles.styleCareer}>
-            <AppText
-              text="Career & Success"
-              styleText={{fontSize: 20, fontWeight: 'bold'}}
-            />
-          </View>
-          <View style={styles.styleMore}>
-            <AppText
-              text="More ->"
-              styleText={{fontSize: 20, fontWeight: 'bold'}}
-            />
-          </View>
+          <AppButton ButtonStyle={styles.styleScienceFiction}
+          titileStyle={{fontSize: 20, fontWeight: 'bold',color: 'black',backgroundColor: Colors.light.categories.scienceFiction}}
+          TouchableType='TouchableOpacity'
+          title='Science Fiction'
+          onPress={() => navigation.navigate('Categories', {name: 'Science Fiction'})}
+          />
+
+          <AppButton ButtonStyle={styles.styleMore}
+          titileStyle={{fontSize: 20, fontWeight: 'bold',color: 'black',backgroundColor: Colors.light.categories.more}}
+          title='All'
+          TouchableType='TouchableOpacity'
+          onPress={() => navigation.navigate('Categories', {name: 'All'})}
+          />
+          
+          
         </View>
       </View>
     </View>
@@ -70,15 +80,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  styleFiction: {
+  styleHorror: {
     width: Sizes.width(34),
     height: Sizes.height(10),
-    backgroundColor: Colors.light.categories.fiction,
+    backgroundColor: Colors.light.categories.horror,
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  styleBestSellers: {
+  styleAventure: {
     width: Sizes.width(25),
     height: Sizes.height(33.2),
     backgroundColor: Colors.light.categories.BSell,
@@ -86,10 +96,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  styleCareer: {
+  styleScienceFiction: {
     width: Sizes.width(68),
     height: Sizes.height(22),
-    backgroundColor: Colors.light.categories.career,
+    backgroundColor: Colors.light.categories.scienceFiction,
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
