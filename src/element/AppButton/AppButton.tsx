@@ -53,19 +53,18 @@ export function AppButton({
       <TouchableComponent
         {...appButtonProps}
         style={ButtonStyle}
-        onPress={onPress}>
+        onPress={onPress}
+      >
         <Text
           style={[
             {
-              padding: 10,
               backgroundColor: '#007AFF',
               color: 'white',
               textAlign: 'center',
-              borderRadius: 5,
-              marginVertical: 5,
             },
             titileStyle,
-          ]}>
+          ]}
+        >
           {title}
         </Text>
       </TouchableComponent>

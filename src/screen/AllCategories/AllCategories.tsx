@@ -37,6 +37,10 @@ function AllCategories() {
   if (isLoading) {
     return (
       <View style={styles.container}>
+        <AllCategoriesHeader
+          name="All Categories"
+          onPress={() => navigation.goBack()}
+        />
         <Text>Loading...</Text>
       </View>
     );

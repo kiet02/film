@@ -4,20 +4,13 @@ import { AppText } from '../../../element/AppText';
 import Icon from '../../../element/AppButton/AppIcon';
 import { Sizes } from '../../../utils/resource/size';
 
-type AllCategoriesHeaderProps = {
+type BookSaveHeaderProps = {
   name: string;
-  onPress: () => void;
 };
 
-export const AllCategoriesHeader = ({
-  name,
-  onPress,
-}: AllCategoriesHeaderProps) => {
+export const BookSaveHeader = ({ name }: BookSaveHeaderProps) => {
   return (
     <View style={styles.header}>
-      <TouchableOpacity onPress={onPress} style={styles.backButton}>
-        <Icon name="ArrowLeft" size={24} />
-      </TouchableOpacity>
       <AppText text={name} style={styles.title} />
     </View>
   );
@@ -30,6 +23,7 @@ const styles = StyleSheet.create({
     paddingTop: Sizes.wpx(40),
     paddingHorizontal: Sizes.wpx(10),
     marginBottom: Sizes.wpx(20),
+    marginLeft: Sizes.wpx(10),
   },
   backButton: {
     marginRight: Sizes.wpx(10),

@@ -5,6 +5,7 @@ import { Control, FieldValues, useForm } from 'react-hook-form';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import { AccountService, fetchApi, MainScreenParamList } from '../../utils';
 import { AppInputText } from '../../element';
+import { useEffect } from 'react';
 
 export type TLoginForm = { email: string; password: string };
 
@@ -25,8 +26,19 @@ export default function Login() {
         routes: [{ name: 'tab' }],
       })
     );
-    // navigation.navigate('tab');
   };
+
+  useEffect(() => {
+    const account = AccountService.get();
+    if (account?.token) {
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: 'tab' }],
+        })
+      );
+    }
+  });
 
   return (
     <View style={Style.main}>
@@ -61,7 +73,6 @@ export default function Login() {
         }}
       />
       <AnimatedButton
-        duration={900}
         onPressLogin={handleSubmit(onSubmit)}
         onPressRegister={() => navigation.navigate('Register')}
       />

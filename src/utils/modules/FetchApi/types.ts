@@ -10,7 +10,7 @@ export type TProfileResponse = {
 };
 export type TUser = {
   email: any;
-  username: string;
+  name: string;
   id: string;
   avatar: {
     gravatar: {
@@ -21,31 +21,46 @@ export type TUser = {
   message: string;
   status: number;
 };
-export type TAuthor ={
+export type TAuthor = {
   id: number;
   name: string;
+  img: string;
   createdAt: string;
   updatedAt: string;
-}
+};
 export type TGenre = {
   id: number;
   name: string;
   createdAt: string;
   updatedAt: string;
-  Books: TBook
-}
+  Books: TBook;
+};
 
-export type TBook = [{
-        id: number,
-        name: string,
-        img: string,
-        describe:string,
-        createdAt:string,
-        updatedAt:string,
-        authorId: number,
-        genreId: number,
-        Author: TAuthor
-        Genre: TGenre
-  }]
-
-      
+export type TBook = [
+  {
+    id: number;
+    name: string;
+    img: string;
+    describe: string;
+    createdAt: string;
+    updatedAt: string;
+    authorId: number;
+    genreId: number;
+    Author: TAuthor;
+    Genre: TGenre;
+  }
+];
+export type TUpdateUser = {
+  err: number;
+  msg: string;
+  data: {
+    id: number;
+    email: string;
+    password: string;
+    name: string;
+    image: string;
+    role: 'user' | 'admin';
+    createdAt: string;
+    updatedAt: string;
+  };
+};

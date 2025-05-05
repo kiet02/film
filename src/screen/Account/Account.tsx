@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -7,51 +7,131 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
+import { App } from '../../App';
+import { AppImage } from '../../element/AppImage/AppImage';
+import { Sizes } from '../../utils/resource/size';
+import { AppText } from '../../element/AppText';
+import { useUser } from './module/useUser';
+import { AppButton } from '../../element';
+import {
+  AccountService,
+  fetchApi,
+  MainScreenParamList,
+  TabBottomScreen,
+} from '../../utils';
+import BottomSheet, {
+  BottomSheetBackdrop,
+  BottomSheetTextInput,
+  BottomSheetView,
+} from '@gorhom/bottom-sheet';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useBottomSheet } from '../../BottomSheetProvider';
+import { Control, FieldValues, useForm } from 'react-hook-form';
+import { BottomSheetChangeName } from './item/BottomSheetChangeName';
+import { BottomSheetChangePassword } from './item/BottomSheetChangePassword';
+import {
+  CommonActions,
+  useFocusEffect,
+  useNavigation,
+} from '@react-navigation/native';
+
+type TUserForm = {
+  name: string;
+  password: string;
+  confirmPassword: string;
+};
 
 export default function Account() {
-  const [userImage, setUserImage] = useState('https://via.placeholder.com/100');
-  const [userName, setUserName] = useState('User Name');
+  const { data, refetch, isFetching } = useUser();
+  const { openSheet, closeSheet } = useBottomSheet();
+  const navigation = useNavigation<TabBottomScreen<'User'>['navigation']>();
+
+  useFocusEffect(
+    useCallback(() => {
+      // Khi màn hình được focus, không làm gì cả
+      return () => {
+        closeSheet();
+      };
+    }, [closeSheet])
+  );
 
   const handleChangeName = () => {
-    Alert.alert('Change Name', 'Name change functionality here');
+    openSheet(<BottomSheetChangeName refetch={refetch} />, 0);
   };
 
   const handleChangePassword = () => {
-    Alert.alert('Change Password', 'Password change functionality here');
+    openSheet(<BottomSheetChangePassword logOut={handleLogout} />, 1);
   };
 
   const handleLogout = () => {
-    Alert.alert('Logout', 'Are you sure you want to logout?', [
-      {
-        text: 'Cancel',
-        style: 'cancel',
-      },
-      {text: 'OK', onPress: () => console.log('Logout pressed')},
-    ]);
+    AccountService.remove();
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{ name: 'Login' }],
+      })
+    );
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.profileSection}>
-        <Image source={{uri: userImage}} style={styles.profileImage} />
-        <Text style={styles.userName}>{userName}</Text>
+        <AppImage
+          uri=""
+          styles={{
+            width: Sizes.wpx(200),
+            height: Sizes.wpx(200),
+            marginVertical: Sizes.wpx(20),
+          }}
+        />
+        <AppText
+          text={data?.name}
+          styleText={{
+            color: 'black',
+            fontSize: Sizes.wpx(25),
+            fontWeight: 'bold',
+          }}
+        />
       </View>
 
-      <View style={styles.optionsSection}>
-        <TouchableOpacity style={styles.option} onPress={handleChangeName}>
-          <Text style={styles.optionText}>Change Name</Text>
-        </TouchableOpacity>
-        
-        <TouchableOpacity style={styles.option} onPress={handleChangePassword}>
-          <Text style={styles.optionText}>Change Password</Text>
-        </TouchableOpacity>
-        
-        <TouchableOpacity 
-          style={[styles.option, styles.logoutButton]} 
+      <View>
+        <AppButton
+          containerStyle={styles.option}
+          onPress={handleChangeName}
+          title="Change Name"
+          TouchableType="TouchableOpacity"
+          titileStyle={{
+            color: 'black',
+            fontSize: Sizes.wpx(13),
+            height: Sizes.wpx(17),
+            backgroundColor: '#f0f0f0',
+          }}
+        />
+        <AppButton
+          containerStyle={styles.option}
+          onPress={handleChangePassword}
+          title="Change Password"
+          TouchableType="TouchableOpacity"
+          titileStyle={{
+            color: 'black',
+            fontSize: Sizes.wpx(13),
+            height: Sizes.wpx(17),
+            backgroundColor: '#f0f0f0',
+          }}
+        />
+
+        <AppButton
+          containerStyle={[styles.option, styles.logoutButton]}
           onPress={handleLogout}
-        >
-          <Text style={[styles.optionText, styles.logoutText]}>Logout</Text>
-        </TouchableOpacity>
+          title="Logout"
+          TouchableType="TouchableOpacity"
+          titileStyle={{
+            color: 'white',
+            fontSize: Sizes.wpx(15),
+            height: Sizes.wpx(20),
+            backgroundColor: '#ff4444',
+          }}
+        />
       </View>
     </View>
   );
@@ -62,6 +142,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     padding: 20,
+  },
+  contentContainer: {
+    flex: 1,
+    alignItems: 'center',
   },
   profileSection: {
     alignItems: 'center',
@@ -77,14 +161,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-  optionsSection: {
-    marginTop: 20,
-  },
   option: {
+    height: Sizes.wpx(50),
     padding: 15,
     backgroundColor: '#f0f0f0',
     borderRadius: 10,
     marginBottom: 10,
+    justifyContent: 'center',
+    // alignItems: 'center',
   },
   optionText: {
     fontSize: 16,
@@ -96,5 +180,14 @@ const styles = StyleSheet.create({
   },
   logoutText: {
     color: 'white',
+  },
+  input: {
+    marginTop: 8,
+    marginBottom: 10,
+    borderRadius: 10,
+    fontSize: 16,
+    lineHeight: 20,
+    padding: 8,
+    backgroundColor: 'rgba(151, 151, 151, 0.25)',
   },
 });

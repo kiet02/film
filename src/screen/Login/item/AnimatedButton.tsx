@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {View} from 'react-native';
+import React, { useEffect } from 'react';
+import { View } from 'react-native';
 
 import {
   interpolate,
@@ -8,34 +8,35 @@ import {
   withDelay,
   withTiming,
 } from 'react-native-reanimated';
-import {AppButton, AppTextTouchable} from '../../../element';
+import { AppButton, AppTextTouchable } from '../../../element';
+import { Sizes } from '../../../utils/resource/size';
 
-type TAnimatedButton = {duration: number; onPressLogin: () => void,onPressRegister:() => void};
+type TAnimatedButton = {
+  onPressLogin: () => void;
+  onPressRegister: () => void;
+};
 
-export function AnimatedButton({duration, onPressLogin,onPressRegister}: TAnimatedButton) {
-  const button = useSharedValue(0);
-
-  useEffect(() => {
-    button.value = withDelay(duration, withTiming(1, {duration: 1000}));
-  });
-
-  const buttonStyle = useAnimatedStyle(() => {
-    return {
-      opacity: interpolate(button.value, [0, 1], [0, 1]),
-    };
-  });
+export function AnimatedButton({
+  onPressLogin,
+  onPressRegister,
+}: TAnimatedButton) {
   return (
     <View>
       <AppButton
         title="Login"
         TouchableType="TouchableOpacity"
-        ButtonStyle={{width: 200, alignSelf: 'center'}}
+        titileStyle={{
+          color: 'white',
+          fontSize: Sizes.wpx(20),
+          width: Sizes.wpx(200),
+          marginVertical: Sizes.wpx(10),
+          alignSelf: 'center',
+          padding: Sizes.wpx(5),
+          borderRadius: 10,
+        }}
         onPress={onPressLogin}
       />
-      <AppTextTouchable
-        text="Register here"
-        onPress={onPressRegister}
-      />
+      <AppTextTouchable text="Register here" onPress={onPressRegister} />
     </View>
   );
 }

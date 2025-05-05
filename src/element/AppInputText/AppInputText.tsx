@@ -9,11 +9,11 @@ import {
   TextInputProps,
   View,
 } from 'react-native';
-import {AppLabel} from '../AppLabel/AppLabel';
+import { AppLabel } from '../AppLabel/AppLabel';
 import Animated from 'react-native-reanimated';
-import {Controller, UseControllerProps} from 'react-hook-form';
+import { Controller, UseControllerProps } from 'react-hook-form';
 import Icon from './item/IconTextInput';
-import {icons} from 'lucide-react-native';
+import { icons } from 'lucide-react-native';
 import { AppText } from '../AppText';
 type TAppInputText = UseControllerProps &
   Omit<TextInputProps, 'style' | 'defaultValue'> & {
@@ -60,7 +60,7 @@ export function AppInputText({
       rules={rules}
       defaultValue={defaultValue} // Đảm bảo defaultValue luôn có
       render={(
-        {field: {onChange, value},fieldState: {error}}, // Gán mặc định cho value
+        { field: { onChange, value, onBlur }, fieldState: { error } } // Gán mặc định cho value
       ) => (
         <Animated.View style={containerStyle}>
           {label && (
@@ -80,13 +80,15 @@ export function AppInputText({
                 borderRadius: 10,
               },
               inputStyle,
-            ]}>
+            ]}
+          >
             {renderLeft ? <Icon name={icon} size={20} color={'black'} /> : null}
 
             <TextInput
               {...TextInputProps}
               value={value}
               onChangeText={onChangeText(onChange)}
+              onBlur={onBlur}
               style={[
                 {
                   padding: 10,
@@ -103,15 +105,17 @@ export function AppInputText({
               <Icon name={icon} size={20} color={'black'} />
             ) : null}
           </View>
-         {error?.message ?<AppText
-            style={{
-              color: 'red',
-              fontSize: 12,
-              paddingLeft: 10,
-              paddingTop: 5,
-            }} text={error?.message}/> :null} 
-           
-          
+          {error?.message ? (
+            <AppText
+              style={{
+                color: 'red',
+                fontSize: 12,
+                paddingLeft: 10,
+                paddingTop: 5,
+              }}
+              text={error?.message}
+            />
+          ) : null}
         </Animated.View>
       )}
     />

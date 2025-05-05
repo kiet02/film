@@ -1,30 +1,32 @@
-import {CompositeScreenProps} from '@react-navigation/native';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import { CompositeScreenProps } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 export type RootStackParamList = {
   Home: undefined;
-  MainApp: {id: number};
-  MainHome: {id: number};
-  Categories: {name:string}
+  MainApp: { id: number };
+  MainHome: { id: number };
+  Categories: { name: string };
 };
 
 export type AllScreenStackParamList = {
   Intro: undefined;
   Home: undefined;
-  MainApp: {id: number};
-  MainHome: {id: number};
+  MainApp: { id: number };
+  MainHome: { id: number };
   Login: undefined;
   HomeScreen: undefined;
   tab: undefined;
   Register: undefined;
-  Categories: {name:string};
-  AllCategories: {name:string}
+  Categories: { name: string };
+  AllCategories: { name: string };
+  User: undefined;
+  Book: undefined;
 };
 
 export type TabBottomStackParam = {
   House: undefined;
-  MainApp: {id: number};
-  MainHome: {id: number};
+  MainApp: { id: number };
+  MainHome: { id: number };
   Login: undefined;
   HomeScreen: undefined;
   User: undefined;

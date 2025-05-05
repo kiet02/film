@@ -49,11 +49,13 @@ export const Categories = () => {
   if (isLoading) {
     return (
       <View style={styles.container}>
+        <CategoriesHeader name={name} onPress={() => navigation.goBack()} />
+
         <AppText text="Loading..." style={styles.loadingText} />
       </View>
     );
   }
-  console.log(data?.Books.length);
+
   return (
     <View style={styles.container}>
       <CategoriesHeader name={name} onPress={() => navigation.goBack()} />

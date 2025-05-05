@@ -1,7 +1,7 @@
 import AllCategories from '../../../screen/AllCategories/AllCategories';
 import { AccountService } from '../Account';
 import { Apis } from '../Apis';
-import { TBook, TGenre, TUser } from './types';
+import { TBook, TGenre, TUpdateUser, TUser } from './types';
 
 const commonCall = async <T>(
   api: string,
@@ -13,7 +13,6 @@ const commonCall = async <T>(
     // if(!account?.token) {
     //   throw new Error('Account not found')
     // }
-
     let headers = {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${account?.token}`,
@@ -73,6 +72,36 @@ const fetchApi = {
     const response = commonCall<TGenre[]>(Apis.getAllCategoris, option);
     return response;
   },
+  User: () => {
+    const option: RequestInit = {
+      method: 'GET',
+      // body: JSON.stringify({name})
+    };
+    const response = commonCall<TUser>(Apis.getUser, option);
+    return response;
+  },
+  UpdateUser: (name?: string, image?: string) => {
+    const option: RequestInit = {
+      method: 'PUT',
+      body: JSON.stringify({ name, image }),
+    };
+    const response = commonCall<TUpdateUser>(Apis.getUser, option);
+    return response;
+  },
+  changePassword: ({
+    currentPassword,
+    newPassword,
+  }: {
+    currentPassword: string;
+    newPassword: string;
+  }) => {
+    const option: RequestInit = {
+      method: 'POST',
+      body: JSON.stringify({ currentPassword, newPassword }),
+    };
+    const response = commonCall<TUpdateUser>(Apis.getChangePassword, option);
+    return response;
+  },
 };
 
 const ApiKeys = {
@@ -81,5 +110,6 @@ const ApiKeys = {
   explore: 'explore',
   categories: 'categories',
   AllCategories: 'AllCategories',
+  user: 'user',
 };
 export { fetchApi, ApiKeys };
