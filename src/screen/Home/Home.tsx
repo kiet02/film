@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { use, useCallback, useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { BackHandler, ToastAndroid, View } from 'react-native';
 import { Categories } from './item/Categories';
 import { AppText } from '../../element/AppText';

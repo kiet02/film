@@ -4,6 +4,9 @@ import { AppText } from '../../element/AppText';
 import { Sizes } from '../../utils/resource/size';
 import Icon from '../../element/AppButton/AppIcon';
 import { useNavigation } from '@react-navigation/native';
+import { Colors } from '../../utils/resource/color';
+import { BookHeader } from './item/BookHeader';
+import { BookInfo } from './item/BookInfo';
 
 export function Book() {
   const navigation = useNavigation();
@@ -11,17 +14,7 @@ export function Book() {
   return (
     <View style={styles.container}>
       {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Icon name="ChevronLeft" size={24} />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Icon name="Bookmark" size={24} />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Icon name="Share" size={24} />
-        </TouchableOpacity>
-      </View>
+      <BookHeader />
 
       {/* Book Cover and Info */}
       <View style={styles.bookInfo}>
@@ -32,41 +25,19 @@ export function Book() {
         <AppText text="Book Title" style={styles.title} />
         <AppText text="Author Name" style={styles.author} />
 
-        {/* Stats */}
-        <View style={styles.statsContainer}>
-          <View style={styles.statItem}>
-            <AppText text="4.5" style={styles.statValue} />
-            <AppText text="rating" style={styles.statLabel} />
-          </View>
-          <View style={styles.statItem}>
-            <AppText text="1" style={styles.statValue} />
-            <AppText text="chapter" style={styles.statLabel} />
-          </View>
-          <View style={styles.statItem}>
-            <AppText text="viet" style={styles.statValue} />
-            <AppText text="language" style={styles.statLabel} />
-          </View>
-          <View style={styles.statItem}>
-            <AppText text="viet" style={styles.statValue} />
-            <AppText text="Audio" style={styles.statLabel} />
-          </View>
-        </View>
-
-        {/* Action Buttons */}
-        <View style={styles.actionContainer}>
-          <TouchableOpacity style={styles.actionButton}>
-            <Icon name="BookOpen" size={24} color="#fff" />
-            <AppText text="Read" style={styles.actionText} />
-          </TouchableOpacity>
-          <View style={styles.divider} />
-          <TouchableOpacity style={styles.actionButton}>
-            <Icon name="Headphones" size={24} color="#fff" />
-            <AppText text="Listen" style={styles.actionText} />
-          </TouchableOpacity>
+        <View
+          style={{
+            backgroundColor: 'white',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: Sizes.wpx(350),
+            borderRadius: 10,
+          }}
+        >
+          <BookInfo />
         </View>
       </View>
 
-      {/* Description */}
       <View style={styles.descriptionContainer}>
         <AppText text="Description" style={styles.descriptionTitle} />
         <AppText
@@ -81,7 +52,7 @@ export function Book() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.light.background,
   },
   header: {
     flexDirection: 'row',

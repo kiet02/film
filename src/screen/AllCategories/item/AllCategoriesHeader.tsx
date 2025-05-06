@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: Sizes.wpx(40),
     paddingHorizontal: Sizes.wpx(10),
     marginBottom: Sizes.wpx(20),
   },

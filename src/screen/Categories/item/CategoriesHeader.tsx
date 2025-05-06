@@ -15,10 +15,7 @@ export const CategoriesHeader = ({ name, onPress }: CategoriesHeaderProps) => {
       <TouchableOpacity onPress={onPress} style={styles.backButton}>
         <Icon name="ArrowLeft" size={24} />
       </TouchableOpacity>
-      <AppText
-        text={name}
-        style={styles.title}
-      />
+      <AppText text={name} style={styles.title} />
     </View>
   );
 };
@@ -27,7 +24,6 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: Sizes.wpx(50),
     paddingHorizontal: Sizes.wpx(20),
   },
   backButton: {

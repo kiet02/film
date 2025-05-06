@@ -4,6 +4,7 @@ import { Control, FieldValues, useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import { useBottomSheet } from '../../../BottomSheetProvider';
 import { fetchApi } from '../../../utils';
+import { useKeyboardExpandSheet } from '../module/useKeyboardExpandSheet';
 
 type TUserForm = {
   password: string;
@@ -14,20 +15,7 @@ type TUserForm = {
 export function BottomSheetChangePassword({ logOut }: { logOut: () => void }) {
   const { control, handleSubmit, reset } = useForm<TUserForm>();
   const { closeSheet, expandSheet, normalSheet } = useBottomSheet();
-
-  useEffect(() => {
-    const keyboardHideListener = Keyboard.addListener('keyboardDidHide', () => {
-      normalSheet(1);
-    });
-    const keyboardShowListener = Keyboard.addListener('keyboardDidShow', () => {
-      expandSheet(3);
-    });
-
-    return () => {
-      keyboardHideListener.remove();
-      keyboardShowListener.remove();
-    };
-  }, []);
+  useKeyboardExpandSheet(true, 1, 3);
 
   const onSubmit = async ({
     password,

@@ -34,6 +34,7 @@ import {
   useFocusEffect,
   useNavigation,
 } from '@react-navigation/native';
+import { Colors } from '../../utils/resource/color';
 
 type TUserForm = {
   name: string;
@@ -104,7 +105,7 @@ export default function Account() {
             color: 'black',
             fontSize: Sizes.wpx(13),
             height: Sizes.wpx(17),
-            backgroundColor: '#f0f0f0',
+            backgroundColor: 'white',
           }}
         />
         <AppButton
@@ -116,7 +117,7 @@ export default function Account() {
             color: 'black',
             fontSize: Sizes.wpx(13),
             height: Sizes.wpx(17),
-            backgroundColor: '#f0f0f0',
+            backgroundColor: 'white',
           }}
         />
 
@@ -140,7 +141,7 @@ export default function Account() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.light.background,
     padding: 20,
   },
   contentContainer: {
@@ -164,7 +165,7 @@ const styles = StyleSheet.create({
   option: {
     height: Sizes.wpx(50),
     padding: 15,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: 'white',
     borderRadius: 10,
     marginBottom: 10,
     justifyContent: 'center',

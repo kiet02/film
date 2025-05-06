@@ -11,6 +11,7 @@ import { Sizes } from '../../utils/resource/size';
 import { BookSaveHeader } from './item/BookSaveHeader';
 import { useNavigation } from '@react-navigation/native';
 import { MainScreenParamList } from '../../utils';
+import { Colors } from '../../utils/resource/color';
 
 type BookItem = {
   id: string;
@@ -68,7 +69,7 @@ export default function BookSave() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.light.background,
   },
   header: {
     fontSize: 24,

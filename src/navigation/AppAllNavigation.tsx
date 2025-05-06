@@ -6,65 +6,68 @@ import Login from '../screen/Login/Login';
 import { Categories } from '../screen/Categories/Categoris';
 import AllCategories from '../screen/AllCategories/AllCategories';
 import { IntroScreen } from '../screen/intro/IntroScreen';
-import BottomSheet, {
-  BottomSheetBackdrop,
-  BottomSheetView,
-} from '@gorhom/bottom-sheet';
-import { useMemo, useRef } from 'react';
-import { Text } from 'react-native';
+import { View } from 'react-native';
 import Account from '../screen/Account/Account';
-import { BottomSheetProvider } from '../BottomSheetProvider';
 import { Book } from '../screen/Book/Book';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export function AppAllNavigation() {
   const Stack = createNativeStackNavigator<AllScreenStackParamList>();
-  const bottomSheetRef = useRef<BottomSheet>(null);
-  const snapPoints = useMemo(() => ['25%'], []);
-  return (
-    <>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="tab"
-          component={AppBottomTab}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Register"
-          component={Register}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Categories"
-          component={Categories}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="AllCategories"
-          component={AllCategories}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Intro"
-          component={IntroScreen}
-          options={{ headerShown: false }}
-        />
+  const insets = useSafeAreaInsets();
 
-        <Stack.Screen
-          name="User"
-          component={Account}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Book"
-          component={Book}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    </>
+  return (
+    <View style={{ flex: 1, backgroundColor: '#fcf3de' }}>
+      <View
+        style={{
+          flex: 1,
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
+        }}
+      >
+        <Stack.Navigator initialRouteName="Login">
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="tab"
+            component={AppBottomTab}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={Register}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Categories"
+            component={Categories}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="AllCategories"
+            component={AllCategories}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Intro"
+            component={IntroScreen}
+            options={{ headerShown: false }}
+          />
+
+          <Stack.Screen
+            name="User"
+            component={Account}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Book"
+            component={Book}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </View>
+    </View>
   );
 }

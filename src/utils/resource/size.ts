@@ -1,4 +1,4 @@
-import {Dimensions} from 'react-native';
+import { Dimensions } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -63,4 +63,4 @@ const Sizes = {
   border: wpx(1),
 };
 
-export {Sizes};
+export { Sizes };

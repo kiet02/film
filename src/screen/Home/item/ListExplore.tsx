@@ -6,58 +6,36 @@ import {
   StyleSheet,
   Image,
   ImageSourcePropType,
+  TouchableOpacity,
 } from 'react-native';
 import { Sizes } from '../../../utils/resource/size';
 import { AppText } from '../../../element/AppText';
 import { Colors } from '../../../utils/resource/color';
 import { useExplore } from '../module/useExplore';
 import { AppImage } from '../../../element/AppImage/AppImage';
+import { useLoader } from '../../../element/AppLoad/LoaderContext';
 
 export function ListExplore() {
   const { data } = useExplore();
 
-  // const data = [
-  //   {
-  //     image: require('../../../utils/image/Logo.png'),
-  //     name: 'The art',
-  //     author: 'sdsdsdsdsd',
-  //   },
-  //   {
-  //     image: require('../../../utils/image/Logo.png'),
-  //     name: 'The art1',
-  //     author: 'sdsdsdsdsd',
-  //   },
-  //   {
-  //     image: require('../../../utils/image/Logo.png'),
-  //     name: 'The art2',
-  //     author: 'sdsdsdsdsd',
-  //   },
-  //   {
-  //     image: require('../../../utils/image/Logo.png'),
-  //     name: 'The art3',
-  //     author: 'sdsdsdsdsd',
-  //   },
-  //   {
-  //     image: require('../../../utils/image/Logo.png'),
-  //     name: 'The art4',
-  //     author: 'sdsdsdsdsd',
-  //   },
-  //   {
-  //     image: require('../../../utils/image/Logo.png'),
-  //     name: 'The art5',
-  //     author: 'sdsdsdsdsd',
-  //   },
-  // ];
+  const { showLoader, hideLoader } = useLoader();
+
+  const handleLoad = async () => {
+    showLoader();
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    hideLoader();
+  };
+
   return (
     <View style={{ height: Sizes.height(20), marginBottom: Sizes.wpx(20) }}>
       <FlatList
         data={data}
         horizontal
         showsHorizontalScrollIndicator={false}
-        keyExtractor={item => item.name.toString()}
+        keyExtractor={item => item?.name.toString()}
         renderItem={({ item }) => (
-          <View style={styles.item}>
-            <AppImage uri={item.img} styles={styles.image} />
+          <TouchableOpacity style={styles.item} onPress={handleLoad}>
+            <AppImage uri={item?.img} styles={styles.image} />
             <View>
               <AppText
                 key={'title'}
@@ -66,13 +44,13 @@ export function ListExplore() {
                   fontSize: 20,
                   maxWidth: Sizes.width(45),
                 }}
-                text={item.name}
+                text={item?.name}
                 numberOfLines={1}
                 ellipsizeMode="tail"
               />
-              <AppText key={'author'} text={item.Author.name} />
+              <AppText key={'author'} text={item.Author?.name} />
             </View>
-          </View>
+          </TouchableOpacity>
         )}
       />
     </View>

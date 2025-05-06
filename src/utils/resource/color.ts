@@ -10,7 +10,7 @@ const Colors = {
     explore: {
       item: '#f7f7f7',
     },
-    background: '#ffffff',
+    background: '#fcf3de',
     bottomTab: '#000000',
     tabFocus: '#ffffff',
   },
@@ -24,4 +24,4 @@ export type TColor = {
   };
 };
 
-export {Colors};
+export { Colors };

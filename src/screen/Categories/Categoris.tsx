@@ -15,6 +15,7 @@ import { RootStackParamList, RootStackScreenProps } from '../../utils';
 import { Sizes } from '../../utils/resource/size';
 import Icon from '../../element/AppButton/AppIcon';
 import { CategoriesHeader } from './item/CategoriesHeader';
+import { Colors } from '../../utils/resource/color';
 
 type Category = {
   id: string;
@@ -26,7 +27,7 @@ type Category = {
 export const Categories = () => {
   const navigation = useNavigation();
   const route = useRoute<RootStackScreenProps<'Categories'>['route']>();
-  const name = route.params.name;
+  const name = route.params?.name;
   const { data, isLoading } = useCategories(name);
 
   const renderItem = ({ item }: { item: Category }) => (
@@ -80,7 +81,7 @@ export const Categories = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: Colors.light.background,
   },
   listContainer: {
     padding: 16,

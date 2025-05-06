@@ -5,6 +5,7 @@ import { fetchApi } from '../../../utils';
 import { useBottomSheet } from '../../../BottomSheetProvider';
 import { useEffect, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
+import { useKeyboardExpandSheet } from '../module/useKeyboardExpandSheet';
 
 type TUserForm = {
   changeName: string;
@@ -17,20 +18,7 @@ type TUserFormChangeName = {
 export function BottomSheetChangeName({ refetch }: TUserFormChangeName) {
   const { control, handleSubmit, reset } = useForm<TUserForm>();
   const { closeSheet, expandSheet, normalSheet } = useBottomSheet();
-
-  useEffect(() => {
-    const keyboardHideListener = Keyboard.addListener('keyboardDidHide', () => {
-      normalSheet(0);
-    });
-    const keyboardShowListener = Keyboard.addListener('keyboardDidShow', () => {
-      expandSheet(2);
-    });
-
-    return () => {
-      keyboardHideListener.remove();
-      keyboardShowListener.remove();
-    };
-  }, []);
+  useKeyboardExpandSheet(true, 0, 2);
 
   const onSubmit = async ({ changeName }: TUserForm) => {
     const result = await fetchApi.UpdateUser(changeName);
@@ -40,6 +28,10 @@ export function BottomSheetChangeName({ refetch }: TUserFormChangeName) {
       reset();
       closeSheet(); // Đóng BottomSheet sau khi thành công
     }
+    console.log(result.msg);
+    console.log('====================================');
+    console.log(result.err);
+    console.log('====================================');
   };
 
   return (

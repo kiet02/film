@@ -10,6 +10,7 @@ import { AllCategoriesHeader } from './item/AllCategoriesHeader';
 import { MainScreenParamList } from '../../utils';
 import { useNavigation } from '@react-navigation/native';
 import { useAllCategories } from './module/useAllCategories';
+import { Colors } from '../../utils/resource/color';
 
 const categories = [
   { id: '1', name: 'Action' },
@@ -28,9 +29,9 @@ function AllCategories() {
   const renderCategory = ({ item }: { item: { id: string; name: string } }) => (
     <TouchableOpacity
       style={styles.categoryItem}
-      onPress={() => navigation.navigate('Categories', { name: item.name })}
+      onPress={() => navigation.navigate('Categories', { name: item?.name })}
     >
-      <Text style={styles.categoryText}>{item.name}</Text>
+      <Text style={styles.categoryText}>{item?.name}</Text>
     </TouchableOpacity>
   );
 
@@ -66,8 +67,7 @@ function AllCategories() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    padding: 10,
+    backgroundColor: Colors.light.background,
   },
   row: {
     justifyContent: 'space-between',
