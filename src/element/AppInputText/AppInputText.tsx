@@ -7,11 +7,13 @@ import {
   TextStyle,
   ViewStyle,
   TextInputProps,
+  View,
 } from 'react-native';
 import {AppLabel} from '../AppLabel/AppLabel';
 import Animated from 'react-native-reanimated';
 import {Controller, UseControllerProps} from 'react-hook-form';
-
+import Icon from './item/IconTextInput';
+import {icons} from 'lucide-react-native';
 type TAppInputText = UseControllerProps &
   Omit<TextInputProps, 'style' | 'defaultValue'> & {
     label?: string;
@@ -22,6 +24,9 @@ type TAppInputText = UseControllerProps &
     containerLabel?: StyleProp<ViewStyle>;
     labelStyle?: StyleProp<TextStyle>;
     defaultValue?: string;
+    renderLeft?: boolean;
+    renderRight?: boolean;
+    icon?: keyof typeof icons;
   };
 
 export function AppInputText({
@@ -35,10 +40,15 @@ export function AppInputText({
   name,
   control,
   rules,
+  renderLeft = true,
+  renderRight,
+  icon,
   ...TextInputProps
 }: TAppInputText) {
   const onChangeText = (onChange: (...event: any[]) => void) => (e: string) => {
-    if (e.startsWith(' ')) return; // Ngăn nhập khoảng trắng đầu
+    if (e.startsWith(' ')) {
+      return;
+    }
     onChange(e);
   };
 
@@ -59,26 +69,41 @@ export function AppInputText({
               labelStyle={labelStyle}
             />
           )}
-          <TextInput
-            {...TextInputProps}
-            value={value} // value luôn là chuỗi
-            onChangeText={onChangeText(onChange)}
+          <View
             style={[
               {
-                padding: 10,
-                width: 350,
-                height: 50,
-                marginBottom: 20,
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: 'red',
+                paddingHorizontal: 10,
                 borderRadius: 10,
-                backgroundColor: 'white',
-                elevation: 1,
-                color: 'black',
-                marginTop: 5,
               },
-              textStyle,
               inputStyle,
-            ]}
-          />
+            ]}>
+            {renderLeft ? <Icon name={icon} size={20} color={'black'} /> : null}
+
+            <TextInput
+              {...TextInputProps}
+              value={value}
+              onChangeText={onChangeText(onChange)}
+              style={[
+                {
+                  padding: 10,
+                  width: 350,
+                  height: 50,
+                  borderRadius: 10,
+                  backgroundColor: 'white',
+                  elevation: 1,
+                  color: 'black',
+                },
+                textStyle,
+              ]}
+            />
+            {renderRight ? (
+              <Icon name={icon} size={20} color={'black'} />
+            ) : null}
+          </View>
         </Animated.View>
       )}
     />
