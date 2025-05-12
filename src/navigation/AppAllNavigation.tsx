@@ -10,6 +10,7 @@ import { View } from 'react-native';
 import Account from '../screen/Account/Account';
 import { Book } from '../screen/Book/Book';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { BookReading } from '../screen/BookReading/BookReading';
 
 export function AppAllNavigation() {
   const Stack = createNativeStackNavigator<AllScreenStackParamList>();
@@ -64,6 +65,11 @@ export function AppAllNavigation() {
           <Stack.Screen
             name="Book"
             component={Book}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="BookReading"
+            component={BookReading}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

@@ -21,6 +21,7 @@ export type AllScreenStackParamList = {
   AllCategories: { name: string };
   User: undefined;
   Book: undefined;
+  BookReading: undefined;
 };
 
 export type TabBottomStackParam = {

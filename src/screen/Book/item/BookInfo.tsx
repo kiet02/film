@@ -5,9 +5,12 @@ import { AppText } from '../../../element/AppText';
 import { Sizes } from '../../../utils/resource/size';
 import { Colors } from '../../../utils/resource/color';
 import Icon from '../../../element/AppButton/AppIcon';
+import { useNavigation } from '@react-navigation/native';
+import { MainScreenParamList } from '../../../utils';
 
 // create a component
 export function BookInfo() {
+  const navigation = useNavigation<MainScreenParamList<'Book'>['navigation']>();
   return (
     <View style={styles.statsContainer}>
       <View
@@ -34,7 +37,10 @@ export function BookInfo() {
       </View>
 
       <View style={styles.actionContainer}>
-        <TouchableOpacity style={styles.actionButton}>
+        <TouchableOpacity
+          style={styles.actionButton}
+          onPress={() => navigation.navigate('BookReading')}
+        >
           <Icon name="BookOpen" size={24} color="#fff" />
           <AppText text="Read" style={styles.actionText} />
         </TouchableOpacity>
