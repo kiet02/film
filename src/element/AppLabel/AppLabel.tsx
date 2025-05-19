@@ -1,16 +1,20 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Text, ViewStyle, StyleProp, TextStyle} from 'react-native';
+import { View, Text, ViewStyle, StyleProp, TextStyle } from 'react-native';
+import { useAppTheme } from '../../hooks/useAppTheme';
 
 type TAppLabel = {
-  name?: string;
-  containerLabel?: StyleProp<ViewStyle>;
-  labelStyle?: StyleProp<TextStyle>;
+  name: string;
+  containerLabel?: ViewStyle;
+  labelStyle?: TextStyle;
 };
-export function AppLabel({name, containerLabel, labelStyle}: TAppLabel) {
+
+export function AppLabel({ name, containerLabel, labelStyle }: TAppLabel) {
+  const { colors } = useAppTheme();
+
   return (
     <View style={containerLabel}>
-      <Text style={[{color: 'black'}, labelStyle]}>{name}</Text>
+      <Text style={[{ color: colors.text.primary }, labelStyle]}>{name}</Text>
     </View>
   );
 }

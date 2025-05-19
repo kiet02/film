@@ -11,6 +11,8 @@ import { MainScreenParamList } from '../../utils';
 import { useNavigation } from '@react-navigation/native';
 import { useAllCategories } from './module/useAllCategories';
 import { Colors } from '../../utils/resource/color';
+import { AppAreaView } from '../../element/AppAreaView/AppAreaView';
+import { useAppTheme } from '../../hooks/useAppTheme';
 
 const categories = [
   { id: '1', name: 'Action' },
@@ -23,32 +25,36 @@ const categories = [
 
 function AllCategories() {
   const { data, isLoading } = useAllCategories();
+  const { colors } = useAppTheme();
 
   const navigation =
     useNavigation<MainScreenParamList<'AllCategories'>['navigation']>();
+
   const renderCategory = ({ item }: { item: { id: string; name: string } }) => (
     <TouchableOpacity
-      style={styles.categoryItem}
+      style={[styles.categoryItem, { backgroundColor: colors.surface.primary }]}
       onPress={() => navigation.navigate('Categories', { name: item?.name })}
     >
-      <Text style={styles.categoryText}>{item?.name}</Text>
+      <Text style={[styles.categoryText, { color: colors.text.primary }]}>
+        {item?.name}
+      </Text>
     </TouchableOpacity>
   );
 
   if (isLoading) {
     return (
-      <View style={styles.container}>
+      <AppAreaView>
         <AllCategoriesHeader
           name="All Categories"
           onPress={() => navigation.goBack()}
         />
         <Text>Loading...</Text>
-      </View>
+      </AppAreaView>
     );
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <AllCategoriesHeader
         name="All Categories"
         onPress={() => navigation.goBack()}
@@ -59,6 +65,7 @@ function AllCategories() {
         keyExtractor={item => item.id}
         numColumns={2}
         columnWrapperStyle={styles.row}
+        contentContainerStyle={{ padding: 10 }}
       />
     </View>
   );
@@ -67,7 +74,6 @@ function AllCategories() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.light.background,
   },
   row: {
     justifyContent: 'space-between',
@@ -76,7 +82,6 @@ const styles = StyleSheet.create({
   categoryItem: {
     flex: 1,
     margin: 5,
-    backgroundColor: '#f0f0f0',
     padding: 15,
     borderRadius: 8,
     alignItems: 'center',
@@ -84,7 +89,6 @@ const styles = StyleSheet.create({
   categoryText: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#333',
   },
 });
 

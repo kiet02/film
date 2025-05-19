@@ -4,9 +4,9 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { AppText } from '../../../element/AppText';
 import { Sizes } from '../../../utils/resource/size';
 import { Colors } from '../../../utils/resource/color';
-import Icon from '../../../element/AppButton/AppIcon';
 import { useNavigation } from '@react-navigation/native';
 import { MainScreenParamList } from '../../../utils';
+import { AppIcon } from '../../../element/AppIcon/AppIcon';
 
 // create a component
 export function BookInfo() {
@@ -23,16 +23,16 @@ export function BookInfo() {
         }}
       >
         <View style={styles.statItem}>
-          <AppText text="4.5" style={styles.statValue} />
-          <AppText text="rating" style={styles.statLabel} />
+          <AppText text="4.5" styleText={styles.statValue} />
+          <AppText text="rating" styleText={styles.statLabel} />
         </View>
         <View style={styles.statItem}>
-          <AppText text="1" style={styles.statValue} />
-          <AppText text="chapter" style={styles.statLabel} />
+          <AppText text="1" styleText={styles.statValue} />
+          <AppText text="chapter" styleText={styles.statLabel} />
         </View>
         <View style={styles.statItem}>
-          <AppText text="viet" style={styles.statValue} />
-          <AppText text="language" style={styles.statLabel} />
+          <AppText text="viet" styleText={styles.statValue} />
+          <AppText text="language" styleText={styles.statLabel} />
         </View>
       </View>
 
@@ -41,8 +41,8 @@ export function BookInfo() {
           style={styles.actionButton}
           onPress={() => navigation.navigate('BookReading')}
         >
-          <Icon name="BookOpen" size={24} color="#fff" />
-          <AppText text="Read" style={styles.actionText} />
+          <AppIcon name="BookOpen" size={24} />
+          <AppText text="Read" styleText={styles.actionText} />
         </TouchableOpacity>
       </View>
     </View>

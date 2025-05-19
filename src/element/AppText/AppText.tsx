@@ -1,30 +1,22 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleProp,
-  ViewStyle,
-  TextStyle,
-  TextProps,
-} from 'react-native';
+import { Text, TextStyle } from 'react-native';
+import { useAppTheme } from '../../hooks/useAppTheme';
 
-type TAppText = Omit<TextProps, 'props'> & {
+interface AppTextProps {
   text?: string;
-  styleContainer?: StyleProp<ViewStyle>;
-  styleText?: StyleProp<TextStyle>;
-};
+  styleText?: TextStyle;
+  numberOfLines?: number;
+}
 
-export function AppText({
-  text,
-  styleContainer,
-  styleText,
-  ...TextProps
-}: TAppText) {
+export function AppText({ text, styleText, numberOfLines }: AppTextProps) {
+  const { colors } = useAppTheme();
+
   return (
-    <View style={styleContainer}>
-      <Text style={styleText} {...TextProps}>
-        {text}
-      </Text>
-    </View>
+    <Text
+      style={[{ color: colors.text.primary }, styleText]}
+      numberOfLines={numberOfLines}
+    >
+      {text}
+    </Text>
   );
 }

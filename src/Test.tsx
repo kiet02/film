@@ -1,6 +1,6 @@
 import { BlurMask, Canvas, Path, Skia } from '@shopify/react-native-skia';
 import React, { useMemo } from 'react';
-import { Modal, StyleSheet, View } from 'react-native';
+import { Modal, StatusBar, StyleSheet, View } from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -10,13 +10,14 @@ import Animated, {
   interpolate,
   useDerivedValue,
 } from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const CanvaSizeW = 70;
 const CanvaSizeR = CanvaSizeW / 3.5;
 
 const SVGLoader = () => {
   const rotation = useSharedValue(0);
-
+const insets = useSafeAreaInsets();
   // Xoay vô hạn
   rotation.value = withRepeat(
     withTiming(360, {
@@ -49,6 +50,19 @@ const SVGLoader = () => {
   }, []);
 
   return (
+   <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: '#6a51ae',
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
+          paddingLeft: insets.left,
+          paddingRight: insets.right,
+        },
+      ]}
+    >
+    <StatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
     <Modal transparent animationType="fade" statusBarTranslucent>
       {/* Layer mờ nền */}
       <View style={StyleSheet.absoluteFill}>
@@ -72,6 +86,8 @@ const SVGLoader = () => {
         </Animated.View>
       </View>
     </Modal>
+    </View>
+    
   );
 };
 
@@ -86,6 +102,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     zIndex: 10,
   },
+  container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
 });
 
 export default SVGLoader;

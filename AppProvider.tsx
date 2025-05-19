@@ -6,6 +6,7 @@ import { AppAllNavigation } from './src/navigation/AppAllNavigation';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { BottomSheetProvider } from './src/BottomSheetProvider';
 import { LoaderProvider } from './src/element/AppLoad/LoaderContext';
+import { ThemeProvider } from './src/ThemeProvider';
 import {
   SafeAreaProvider,
   SafeAreaView,
@@ -21,18 +22,15 @@ const AppProvider = () => {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
         <QueryClientProvider client={queryClient}>
-          <StatusBar
-            translucent
-            backgroundColor="transparent"
-            barStyle="dark-content"
-          />
-          <LoaderProvider>
-            <FormProvider {...methods}>
-              <NavigationContainer>
-                <AppAllNavigation />
-              </NavigationContainer>
-            </FormProvider>
-          </LoaderProvider>
+          <ThemeProvider>
+            <LoaderProvider>
+              <FormProvider {...methods}>
+                <NavigationContainer>
+                  <AppAllNavigation />
+                </NavigationContainer>
+              </FormProvider>
+            </LoaderProvider>
+          </ThemeProvider>
         </QueryClientProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>

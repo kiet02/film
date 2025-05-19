@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   Alert,
+  Switch,
 } from 'react-native';
 import { App } from '../../App';
 import { AppImage } from '../../element/AppImage/AppImage';
@@ -13,6 +14,8 @@ import { Sizes } from '../../utils/resource/size';
 import { AppText } from '../../element/AppText';
 import { useUser } from './module/useUser';
 import { AppButton } from '../../element';
+import { useTheme } from '../../ThemeProvider';
+import { useAppTheme } from '../../hooks/useAppTheme';
 import {
   AccountService,
   fetchApi,
@@ -35,6 +38,7 @@ import {
   useNavigation,
 } from '@react-navigation/native';
 import { Colors } from '../../utils/resource/color';
+import { AppAreaView } from '../../element/AppAreaView/AppAreaView';
 
 type TUserForm = {
   name: string;
@@ -46,6 +50,8 @@ export default function Account() {
   const { data, refetch, isFetching } = useUser();
   const { openSheet, closeSheet } = useBottomSheet();
   const navigation = useNavigation<TabBottomScreen<'User'>['navigation']>();
+  const { isDarkMode, toggleTheme } = useTheme();
+  const { colors } = useAppTheme();
 
   useFocusEffect(
     useCallback(() => {
@@ -75,7 +81,16 @@ export default function Account() {
   };
 
   return (
-    <View style={styles.container}>
+    <AppAreaView style={styles.container}>
+      <View style={styles.header}>
+        <Switch
+          style={styles.themeSwitch}
+          value={isDarkMode}
+          onValueChange={toggleTheme}
+          trackColor={{ false: '#767577', true: '#81b0ff' }}
+          thumbColor={isDarkMode ? '#f5dd4b' : '#f4f3f4'}
+        />
+      </View>
       <View style={styles.profileSection}>
         <AppImage
           uri=""
@@ -88,7 +103,7 @@ export default function Account() {
         <AppText
           text={data?.name}
           styleText={{
-            color: 'black',
+            color: colors.text.primary,
             fontSize: Sizes.wpx(25),
             fontWeight: 'bold',
           }}
@@ -97,27 +112,31 @@ export default function Account() {
 
       <View>
         <AppButton
-          containerStyle={styles.option}
+          containerStyle={[
+            styles.option,
+            { backgroundColor: colors.surface.primary },
+          ]}
           onPress={handleChangeName}
           title="Change Name"
           TouchableType="TouchableOpacity"
           titileStyle={{
-            color: 'black',
+            color: colors.text.primary,
             fontSize: Sizes.wpx(13),
             height: Sizes.wpx(17),
-            backgroundColor: 'white',
           }}
         />
         <AppButton
-          containerStyle={styles.option}
+          containerStyle={[
+            styles.option,
+            { backgroundColor: colors.surface.primary },
+          ]}
           onPress={handleChangePassword}
           title="Change Password"
           TouchableType="TouchableOpacity"
           titileStyle={{
-            color: 'black',
+            color: colors.text.primary,
             fontSize: Sizes.wpx(13),
             height: Sizes.wpx(17),
-            backgroundColor: 'white',
           }}
         />
 
@@ -134,15 +153,23 @@ export default function Account() {
           }}
         />
       </View>
-    </View>
+    </AppAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.light.background,
     padding: 20,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  themeSwitch: {
+    transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }],
   },
   contentContainer: {
     flex: 1,
@@ -165,11 +192,9 @@ const styles = StyleSheet.create({
   option: {
     height: Sizes.wpx(50),
     padding: 15,
-    backgroundColor: 'white',
     borderRadius: 10,
     marginBottom: 10,
     justifyContent: 'center',
-    // alignItems: 'center',
   },
   optionText: {
     fontSize: 16,

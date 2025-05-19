@@ -6,12 +6,16 @@ import { CommonActions, useNavigation } from '@react-navigation/native';
 import { AccountService, fetchApi, MainScreenParamList } from '../../utils';
 import { AppInputText } from '../../element';
 import { useEffect } from 'react';
+import { AppAreaView } from '../../element/AppAreaView/AppAreaView';
+import { Colors } from '../../utils/resource/color';
+import { useAppTheme } from '../../hooks/useAppTheme';
 
 export type TLoginForm = { email: string; password: string };
 
 export default function Login() {
   const { control, handleSubmit } = useForm<TLoginForm>();
   const navigation = useNavigation<MainScreenParamList<'Home'>['navigation']>();
+  const { colors } = useAppTheme();
 
   const onSubmit = async ({ email, password }: TLoginForm) => {
     const resule = await fetchApi.login(email, password);
@@ -41,7 +45,7 @@ export default function Login() {
   });
 
   return (
-    <View style={Style.main}>
+    <AppAreaView style={{ justifyContent: 'center', alignItems: 'center' }}>
       <Image
         source={require('../../utils/image/Logo.png')} // Đảm bảo đường dẫn đúng
         style={Style.imag}
@@ -76,14 +80,13 @@ export default function Login() {
         onPressLogin={handleSubmit(onSubmit)}
         onPressRegister={() => navigation.navigate('Register')}
       />
-    </View>
+    </AppAreaView>
   );
 }
 
 const Style = StyleSheet.create({
   main: {
     flex: 1,
-    backgroundColor: '#fcf3de',
     justifyContent: 'center',
   },
   imag: {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { AppText } from '../../../element/AppText';
-import Icon from '../../../element/AppButton/AppIcon';
+import { AppIcon } from '../../../element/AppIcon/AppIcon';
 import { Sizes } from '../../../utils/resource/size';
 
 type BookSaveHeaderProps = {
@@ -11,7 +11,7 @@ type BookSaveHeaderProps = {
 export const BookSaveHeader = ({ name }: BookSaveHeaderProps) => {
   return (
     <View style={styles.header}>
-      <AppText text={name} style={styles.title} />
+      <AppText text={name} styleText={styles.title} />
     </View>
   );
 };

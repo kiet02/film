@@ -18,11 +18,11 @@ export function HomeHeader() {
         icon="Search"
         placeholderTextColor={'black'}
         inputStyle={{
-          backgroundColor: Colors.light.explore.item,
+          backgroundColor: Colors.explore.item,
           width: Sizes.width(95),
         }}
         textStyle={{
-          backgroundColor: Colors.light.explore.item,
+          backgroundColor: Colors.explore.item,
         }}
       />
     </View>

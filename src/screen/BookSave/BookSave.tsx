@@ -12,6 +12,7 @@ import { BookSaveHeader } from './item/BookSaveHeader';
 import { useNavigation } from '@react-navigation/native';
 import { MainScreenParamList } from '../../utils';
 import { Colors } from '../../utils/resource/color';
+import { AppAreaView } from '../../element/AppAreaView/AppAreaView';
 
 type BookItem = {
   id: string;
@@ -46,13 +47,13 @@ export default function BookSave() {
       onPress={() => navigation.navigate('Book')}
     >
       <Image source={{ uri: item.imageUrl }} style={styles.bookCover} />
-      <AppText text={item.title} style={styles.bookTitle} />
-      <AppText text={item.author} style={styles.authorName} />
+      <AppText text={item.title} styleText={styles.bookTitle} />
+      <AppText text={item.author} styleText={styles.authorName} />
     </TouchableOpacity>
   );
 
   return (
-    <View style={styles.container}>
+    <AppAreaView>
       <BookSaveHeader name="Book mark" />
       <FlatList
         data={mockData}
@@ -62,14 +63,14 @@ export default function BookSave() {
         columnWrapperStyle={styles.row}
         contentContainerStyle={styles.listContainer}
       />
-    </View>
+    </AppAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.light.background,
+    backgroundColor: Colors.background,
   },
   header: {
     fontSize: 24,

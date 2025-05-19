@@ -7,10 +7,14 @@ import { Sizes } from '../../utils/resource/size';
 import { ListExplore } from './item/ListExplore';
 import { HomeHeader } from './item/HomeHeader';
 import { useFocusEffect } from '@react-navigation/native';
+import { AppAreaView } from '../../element/AppAreaView/AppAreaView';
+
+import { useAppTheme } from '../../hooks/useAppTheme';
 
 export function HomeScreen() {
   const backPressCount = useRef(0);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { colors } = useAppTheme();
 
   useFocusEffect(
     useCallback(() => {
@@ -45,27 +49,26 @@ export function HomeScreen() {
   );
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#fcf3de',
-      }}
-    >
+    <AppAreaView style={{ justifyContent: 'center', alignItems: 'center' }}>
       <HomeHeader />
       <AppText
-        styleText={{ fontSize: 30, fontWeight: 'bold' }}
-        styleContainer={{ width: Sizes.width(95), marginTop: Sizes.wpx(20) }}
+        styleText={{
+          fontSize: 30,
+          fontWeight: 'bold',
+          marginTop: Sizes.wpx(20),
+        }}
         text="Categories"
       />
       <Categories />
       <AppText
-        styleText={{ fontSize: 30, fontWeight: 'bold' }}
-        styleContainer={{ width: Sizes.width(95), marginTop: Sizes.wpx(30) }}
+        styleText={{
+          fontSize: 30,
+          fontWeight: 'bold',
+          marginTop: Sizes.wpx(20),
+        }}
         text="Explore"
       />
       <ListExplore />
-    </View>
+    </AppAreaView>
   );
 }

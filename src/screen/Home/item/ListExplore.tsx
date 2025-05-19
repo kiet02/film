@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   item: {
     width: Sizes.width(80),
     height: Sizes.height(15),
-    backgroundColor: Colors.light.explore.item,
+    backgroundColor: Colors.explore.item,
     margin: Sizes.wpx(10),
     borderRadius: 15,
     alignItems: 'center',

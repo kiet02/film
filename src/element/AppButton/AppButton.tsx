@@ -1,25 +1,36 @@
 import React from 'react';
 import {
-  TouchableHighlight,
   TouchableOpacity,
+  TouchableHighlight,
   TouchableWithoutFeedback,
   Text,
-  StyleProp,
-  ViewStyle,
   TextStyle,
+  ViewStyle,
+  TouchableOpacityProps,
+  TouchableHighlightProps,
+  TouchableWithoutFeedbackProps,
+  Animated,
+  StyleProp,
 } from 'react-native';
-import Animated from 'react-native-reanimated';
+import { useAppTheme } from '../../hooks/useAppTheme';
+
 type TTouchableComponent =
   | typeof TouchableOpacity
-  | typeof TouchableWithoutFeedback
-  | typeof TouchableHighlight;
-type TAppButton = Omit<TTouchableComponent, 'style'> & {
+  | typeof TouchableHighlight
+  | typeof TouchableWithoutFeedback;
+
+type TTouchableProps =
+  | TouchableOpacityProps
+  | TouchableHighlightProps
+  | TouchableWithoutFeedbackProps;
+
+type TAppButton = TTouchableProps & {
   TouchableType:
-    | 'TouchableWithoutFeedback'
     | 'TouchableOpacity'
-    | 'TouchableHighlight';
-  title?: string;
-  onPress?: () => void;
+    | 'TouchableHighlight'
+    | 'TouchableWithoutFeedback';
+  title: string;
+  onPress: () => void;
   titileStyle?: StyleProp<TextStyle>;
   ButtonStyle?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
@@ -34,7 +45,9 @@ export function AppButton({
   containerStyle,
   ...appButtonProps
 }: TAppButton) {
+  const { colors } = useAppTheme();
   let TouchableComponent: TTouchableComponent;
+
   switch (TouchableType) {
     case 'TouchableOpacity':
       TouchableComponent = TouchableOpacity;
@@ -58,8 +71,8 @@ export function AppButton({
         <Text
           style={[
             {
-              backgroundColor: '#007AFF',
-              color: 'white',
+              backgroundColor: colors.surface.primary,
+              color: colors.text.primary,
               textAlign: 'center',
             },
             titileStyle,

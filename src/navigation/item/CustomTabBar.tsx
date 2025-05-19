@@ -4,7 +4,7 @@ import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Sizes } from '../../utils/resource/size';
 
 import { icons } from 'lucide-react-native';
-import Icon from '../../element/AppButton/AppIcon';
+import { AppIcon } from '../../element/AppIcon/AppIcon';
 const CustomTabBar: React.FC<BottomTabBarProps> = ({ state, navigation }) => {
   return (
     <View style={styles.tabBar}>
@@ -29,7 +29,7 @@ const CustomTabBar: React.FC<BottomTabBarProps> = ({ state, navigation }) => {
             onPress={onPress}
             style={[styles.tabItem, isFocused && styles.tabItemFocused]}
           >
-            <Icon
+            <AppIcon
               name={route.name as keyof typeof icons}
               size={24}
               color={isFocused ? 'white' : '#666'}
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     paddingVertical: 10,
     position: 'absolute',
-    bottom: Sizes.wpx(10),
+    bottom: Sizes.wpx(25),
     width: Sizes.width(70),
     height: Sizes.height(8),
     alignSelf: 'center',

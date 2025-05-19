@@ -17,14 +17,7 @@ export function AppAllNavigation() {
   const insets = useSafeAreaInsets();
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#fcf3de' }}>
-      <View
-        style={{
-          flex: 1,
-          paddingTop: insets.top,
-          paddingBottom: insets.bottom,
-        }}
-      >
+    
         <Stack.Navigator initialRouteName="Login">
           <Stack.Screen
             name="Login"
@@ -73,7 +66,6 @@ export function AppAllNavigation() {
             options={{ headerShown: false }}
           />
         </Stack.Navigator>
-      </View>
-    </View>
+    
   );
 }

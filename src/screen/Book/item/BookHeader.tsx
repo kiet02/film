@@ -1,24 +1,23 @@
 //import liraries
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import Icon from '../../../element/AppButton/AppIcon';
 import { useNavigation } from '@react-navigation/native';
+import { useAppTheme } from '../../../hooks/useAppTheme';
+import { AppIcon } from '../../../element/AppIcon/AppIcon';
 
 // create a component
 export function BookHeader() {
   const navigation = useNavigation();
+  const { colors } = useAppTheme();
 
   return (
     <View style={styles.header}>
       <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Icon name="ChevronLeft" size={24} />
+        <AppIcon name="ChevronLeft" size={24} />
       </TouchableOpacity>
       <TouchableOpacity>
-        <Icon name="Bookmark" size={24} />
+        <AppIcon name="Bookmark" size={24} />
       </TouchableOpacity>
-      {/* <TouchableOpacity>
-        <Icon name="Share" size={24} />
-      </TouchableOpacity> */}
     </View>
   );
 }
