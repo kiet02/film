@@ -22,8 +22,8 @@ type TAppInputText = UseControllerProps &
     textStyle?: StyleProp<TextStyle>;
     inputStyle?: StyleProp<ViewStyle>;
     containerStyle?: StyleProp<ViewStyle>;
-    containerLabel?: StyleProp<ViewStyle>;
-    labelStyle?: StyleProp<TextStyle>;
+    // containerLabel?: StyleProp<ViewStyle>;
+    // labelStyle?: StyleProp<TextStyle>;
     defaultValue?: string;
     renderLeft?: boolean;
     renderRight?: boolean;
@@ -35,8 +35,6 @@ export function AppInputText({
   inputStyle,
   containerStyle,
   label,
-  containerLabel,
-  labelStyle,
   defaultValue = '', // Mặc định là chuỗi rỗng
   name,
   control,
@@ -63,20 +61,13 @@ export function AppInputText({
         { field: { onChange, value, onBlur }, fieldState: { error } } // Gán mặc định cho value
       ) => (
         <Animated.View style={containerStyle}>
-          {label && (
-            <AppLabel
-              name={label}
-              containerLabel={containerLabel}
-              labelStyle={labelStyle}
-            />
-          )}
+          {label && <AppLabel name={label} />}
           <View
             style={[
               {
                 flexDirection: 'row',
                 justifyContent: 'center',
                 alignItems: 'center',
-                paddingHorizontal: 10,
                 borderRadius: 10,
               },
               inputStyle,
@@ -106,15 +97,7 @@ export function AppInputText({
             ) : null}
           </View>
           {error?.message ? (
-            <AppText
-              style={{
-                color: 'red',
-                fontSize: 12,
-                paddingLeft: 10,
-                paddingTop: 5,
-              }}
-              text={error?.message}
-            />
+            <AppText styleText={{ color: 'red' }} text={error?.message} />
           ) : null}
         </Animated.View>
       )}

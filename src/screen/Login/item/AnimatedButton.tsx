@@ -1,13 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 
-import {
-  interpolate,
-  useAnimatedStyle,
-  useSharedValue,
-  withDelay,
-  withTiming,
-} from 'react-native-reanimated';
 import { AppButton, AppTextTouchable } from '../../../element';
 import { Sizes } from '../../../utils/resource/size';
 
@@ -26,7 +19,6 @@ export function AnimatedButton({
         title="Login"
         TouchableType="TouchableOpacity"
         titileStyle={{
-          color: 'white',
           fontSize: Sizes.wpx(20),
           width: Sizes.wpx(200),
           marginVertical: Sizes.wpx(10),

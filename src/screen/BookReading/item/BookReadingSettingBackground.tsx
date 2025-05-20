@@ -6,12 +6,15 @@ interface BookReadingSettingBackgroundProps {
   setBgColor: (value: string) => void;
 }
 
-export function BookReadingSettingBackground({ bgColor, setBgColor }: BookReadingSettingBackgroundProps) {
+export function BookReadingSettingBackground({
+  bgColor,
+  setBgColor,
+}: BookReadingSettingBackgroundProps) {
   return (
     <View>
       <Text style={styles.optionLabel}>Background Color</Text>
       <View style={styles.colorOptions}>
-        {['#ffffff', '#f4ecd8', '#000000'].map((color) => (
+        {['#ffffff', '#f4ecd8', '#000000'].map(color => (
           <TouchableOpacity
             key={color}
             style={[
@@ -47,8 +50,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ccc',
   },
-  selectedColor: { 
-    borderWidth: 2, 
-    borderColor: '#1fb28a' 
+  selectedColor: {
+    borderWidth: 2,
+    borderColor: '#1fb28a',
   },
-}); 
+});

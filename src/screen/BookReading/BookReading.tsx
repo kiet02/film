@@ -1,10 +1,6 @@
 import React, { useRef, useState } from 'react';
-import {
-  StyleSheet,
-  StatusBar,
-  Platform,
-} from 'react-native';
-import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
+import { StatusBar } from 'react-native';
+import BottomSheet from '@gorhom/bottom-sheet';
 import { useAnimatedStyle, withSpring } from 'react-native-reanimated';
 import { BookReadingHeader } from './item/BookReadingHeader';
 import { BookReadingContent } from './item/BookReadingContent';
@@ -28,13 +24,13 @@ export function BookReading() {
 
   return (
     <AppAreaView backgroundColor={bgColor}>
-      <StatusBar 
-        barStyle={bgColor === '#000000' ? 'light-content' : 'dark-content'} 
-        backgroundColor="transparent" 
-        translucent 
+      <StatusBar
+        barStyle={bgColor === '#000000' ? 'light-content' : 'dark-content'}
+        backgroundColor="transparent"
+        translucent
       />
       <BookReadingHeader bgColor={bgColor} toggleSettings={toggleSettings} />
-      <BookReadingContent 
+      <BookReadingContent
         fontSize={fontSize}
         bgColor={bgColor}
         animatedTextStyle={animatedTextStyle}
@@ -52,7 +48,3 @@ export function BookReading() {
     </AppAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1,  },
-});

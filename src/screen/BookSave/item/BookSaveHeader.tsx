@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { AppText } from '../../../element/AppText';
-import { AppIcon } from '../../../element/AppIcon/AppIcon';
 import { Sizes } from '../../../utils/resource/size';
 
 type BookSaveHeaderProps = {

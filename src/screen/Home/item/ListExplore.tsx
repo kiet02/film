@@ -1,23 +1,17 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {
-  View,
-  FlatList,
-  StyleSheet,
-  Image,
-  ImageSourcePropType,
-  TouchableOpacity,
-} from 'react-native';
+import { View, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { Sizes } from '../../../utils/resource/size';
 import { AppText } from '../../../element/AppText';
 import { Colors } from '../../../utils/resource/color';
 import { useExplore } from '../module/useExplore';
 import { AppImage } from '../../../element/AppImage/AppImage';
 import { useLoader } from '../../../element/AppLoad/LoaderContext';
+import { useAppTheme } from '../../../hooks/useAppTheme';
 
 export function ListExplore() {
   const { data } = useExplore();
-
+  const { colors } = useAppTheme();
   const { showLoader, hideLoader } = useLoader();
 
   const handleLoad = async () => {
@@ -34,7 +28,10 @@ export function ListExplore() {
         showsHorizontalScrollIndicator={false}
         keyExtractor={item => item?.name.toString()}
         renderItem={({ item }) => (
-          <TouchableOpacity style={styles.item} onPress={handleLoad}>
+          <TouchableOpacity
+            style={[styles.item, { backgroundColor: colors.explore.item }]}
+            onPress={handleLoad}
+          >
             <AppImage uri={item?.img} styles={styles.image} />
             <View>
               <AppText
@@ -61,7 +58,7 @@ const styles = StyleSheet.create({
   item: {
     width: Sizes.width(80),
     height: Sizes.height(15),
-    backgroundColor: Colors.explore.item,
+
     margin: Sizes.wpx(10),
     borderRadius: 15,
     alignItems: 'center',

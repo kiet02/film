@@ -35,17 +35,18 @@ export const useAppTheme = () => {
     lightColor: ColorValue,
     darkColor: ColorValue
   ): ColorValue => {
+    const mode = isDarkMode ? 'dark' : 'light';
+    const defaultColor = isDarkMode ? darkColor : lightColor;
+
     if (customColors) {
-      const mode = isDarkMode ? 'dark' : 'light';
-      const customColor =
-        mode === 'dark'
-          ? customColors.dark[lightColor as keyof typeof customColors.dark]
-          : customColors.light[lightColor as keyof typeof customColors.light];
-      return (
-        (customColor as ColorValue) || (isDarkMode ? darkColor : lightColor)
-      );
+      const modeColors = customColors[mode];
+      if (modeColors) {
+        const customColor = modeColors[lightColor as keyof typeof modeColors];
+        return (customColor as ColorValue) || defaultColor;
+      }
     }
-    return isDarkMode ? darkColor : lightColor;
+
+    return defaultColor;
   };
 
   return {
@@ -54,52 +55,70 @@ export const useAppTheme = () => {
     updateCustomColors,
     colors: {
       background: getColor(
-        Colors.background,
+        Colors.light.background,
         Colors.dark.background
       ) as ColorValue,
       text: {
-        primary: getColor(Colors.text.primary, Colors.dark.text.primary),
-        secondary: getColor(Colors.text.secondary, Colors.dark.text.secondary),
-        tertiary: getColor(Colors.text.tertiary, Colors.dark.text.tertiary),
+        primary: getColor(Colors.light.text.primary, Colors.dark.text.primary),
+        secondary: getColor(
+          Colors.light.text.secondary,
+          Colors.dark.text.secondary
+        ),
+        tertiary: getColor(
+          Colors.light.text.tertiary,
+          Colors.dark.text.tertiary
+        ),
       },
       surface: {
-        primary: getColor(Colors.surface.primary, Colors.dark.surface.primary),
+        primary: getColor(
+          Colors.light.surface.primary,
+          Colors.dark.surface.primary
+        ),
         secondary: getColor(
-          Colors.surface.secondary,
+          Colors.light.surface.secondary,
           Colors.dark.surface.secondary
         ),
         tertiary: getColor(
-          Colors.surface.tertiary,
+          Colors.light.surface.tertiary,
           Colors.dark.surface.tertiary
         ),
       },
       border: {
-        primary: getColor(Colors.border.primary, Colors.dark.border.primary),
+        primary: getColor(
+          Colors.light.border.primary,
+          Colors.dark.border.primary
+        ),
         secondary: getColor(
-          Colors.border.secondary,
+          Colors.light.border.secondary,
           Colors.dark.border.secondary
         ),
       },
-      bottomTab: getColor(Colors.bottomTab, Colors.dark.bottomTab),
-      tabFocus: getColor(Colors.tabFocus, Colors.dark.tabFocus),
+      bottomTab: getColor(Colors.light.bottomTab, Colors.dark.bottomTab),
+      tabFocus: getColor(Colors.light.tabFocus, Colors.dark.tabFocus),
       categories: {
-        BSell: getColor(Colors.categories.BSell, Colors.dark.categories.BSell),
+        BSell: getColor(
+          Colors.light.categories.BSell,
+          Colors.dark.categories.BSell
+        ),
         classic: getColor(
-          Colors.categories.classic,
+          Colors.light.categories.classic,
           Colors.dark.categories.classic
         ),
         horror: getColor(
-          Colors.categories.horror,
+          Colors.light.categories.horror,
           Colors.dark.categories.horror
         ),
         scienceFiction: getColor(
-          Colors.categories.scienceFiction,
+          Colors.light.categories.scienceFiction,
           Colors.dark.categories.scienceFiction
         ),
-        more: getColor(Colors.categories.more, Colors.dark.categories.more),
+        more: getColor(
+          Colors.light.categories.more,
+          Colors.dark.categories.more
+        ),
       },
       explore: {
-        item: getColor(Colors.explore.item, Colors.dark.explore.item),
+        item: getColor(Colors.light.explore.item, Colors.dark.explore.item),
       },
     },
   };

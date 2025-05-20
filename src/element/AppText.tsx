@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, TextStyle, View, ViewStyle, StyleProp } from 'react-native';
 import { useAppTheme } from '../hooks/useAppTheme';
 
-export interface AppTextProps {
+export interface AppTextProps{
   text?: string;
   styleText?: StyleProp<TextStyle>;
   styleContainer?: StyleProp<ViewStyle>;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, ScrollView, Text } from 'react-native';
-import Animated, { useAnimatedStyle } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
@@ -10,7 +10,11 @@ interface BookReadingContentProps {
   animatedTextStyle: any;
 }
 
-export function BookReadingContent({ fontSize, bgColor, animatedTextStyle }: BookReadingContentProps) {
+export function BookReadingContent({
+  fontSize,
+  bgColor,
+  animatedTextStyle,
+}: BookReadingContentProps) {
   return (
     <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={true}>
       <View style={styles.contentContainer}>
@@ -23,7 +27,8 @@ export function BookReadingContent({ fontSize, bgColor, animatedTextStyle }: Boo
             },
           ]}
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </AnimatedText>
       </View>
     </ScrollView>
@@ -31,11 +36,11 @@ export function BookReadingContent({ fontSize, bgColor, animatedTextStyle }: Boo
 }
 
 const styles = StyleSheet.create({
-  scrollView: { 
-    flex: 1 
+  scrollView: {
+    flex: 1,
   },
-  contentContainer: { 
-    padding: 20, 
-    paddingTop: 10 
+  contentContainer: {
+    padding: 20,
+    paddingTop: 10,
   },
-}); 
+});

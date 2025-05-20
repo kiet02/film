@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useCallback, useRef } from 'react';
-import { BackHandler, ToastAndroid, View } from 'react-native';
+import { BackHandler, ToastAndroid } from 'react-native';
 import { Categories } from './item/Categories';
 import { AppText } from '../../element/AppText';
 import { Sizes } from '../../utils/resource/size';
@@ -9,12 +9,9 @@ import { HomeHeader } from './item/HomeHeader';
 import { useFocusEffect } from '@react-navigation/native';
 import { AppAreaView } from '../../element/AppAreaView/AppAreaView';
 
-import { useAppTheme } from '../../hooks/useAppTheme';
-
 export function HomeScreen() {
   const backPressCount = useRef(0);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const { colors } = useAppTheme();
 
   useFocusEffect(
     useCallback(() => {
@@ -49,13 +46,14 @@ export function HomeScreen() {
   );
 
   return (
-    <AppAreaView style={{ justifyContent: 'center', alignItems: 'center' }}>
+    <AppAreaView style={{ justifyContent: 'center' }}>
       <HomeHeader />
       <AppText
         styleText={{
           fontSize: 30,
           fontWeight: 'bold',
           marginTop: Sizes.wpx(20),
+          marginLeft: Sizes.wpx(10),
         }}
         text="Categories"
       />
@@ -65,6 +63,7 @@ export function HomeScreen() {
           fontSize: 30,
           fontWeight: 'bold',
           marginTop: Sizes.wpx(20),
+          marginLeft: Sizes.wpx(10),
         }}
         text="Explore"
       />

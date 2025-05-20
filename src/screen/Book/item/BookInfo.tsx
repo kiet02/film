@@ -1,37 +1,51 @@
-//import liraries
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { AppText } from '../../../element/AppText';
 import { Sizes } from '../../../utils/resource/size';
-import { Colors } from '../../../utils/resource/color';
+
 import { useNavigation } from '@react-navigation/native';
 import { MainScreenParamList } from '../../../utils';
 import { AppIcon } from '../../../element/AppIcon/AppIcon';
+import { useAppTheme } from '../../../hooks/useAppTheme';
 
 // create a component
 export function BookInfo() {
   const navigation = useNavigation<MainScreenParamList<'Book'>['navigation']>();
+  const { colors } = useAppTheme();
   return (
-    <View style={styles.statsContainer}>
+    <View
+      style={{
+        width: '100%',
+        height: Sizes.wpx(100),
+        backgroundColor: colors.background,
+      }}
+    >
       <View
         style={{
-          flexDirection: 'row',
-          width: '100%',
-          height: Sizes.wpx(90),
           alignItems: 'center',
           justifyContent: 'space-evenly',
+          flexDirection: 'row',
         }}
       >
         <View style={styles.statItem}>
-          <AppText text="4.5" styleText={styles.statValue} />
+          <AppText
+            text="4.5"
+            styleText={[styles.statValue, { color: colors.text.primary }]}
+          />
           <AppText text="rating" styleText={styles.statLabel} />
         </View>
         <View style={styles.statItem}>
-          <AppText text="1" styleText={styles.statValue} />
+          <AppText
+            text="1"
+            styleText={[styles.statValue, { color: colors.text.primary }]}
+          />
           <AppText text="chapter" styleText={styles.statLabel} />
         </View>
         <View style={styles.statItem}>
-          <AppText text="viet" styleText={styles.statValue} />
+          <AppText
+            text="viet"
+            styleText={[styles.statValue, { color: colors.text.primary }]}
+          />
           <AppText text="language" styleText={styles.statLabel} />
         </View>
       </View>
@@ -51,9 +65,6 @@ export function BookInfo() {
 
 // define your styles
 const styles = StyleSheet.create({
-  statsContainer: {
-    width: '100%',
-  },
   statItem: {
     alignItems: 'center',
     width: Sizes.wpx(70),
@@ -66,7 +77,6 @@ const styles = StyleSheet.create({
   },
   statLabel: {
     fontSize: 14,
-    color: '#666',
   },
   actionButton: {
     flex: 1,
@@ -83,7 +93,6 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   actionText: {
-    color: '#fff',
     marginLeft: 8,
     fontSize: 16,
   },

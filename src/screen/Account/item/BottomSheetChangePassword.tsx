@@ -1,7 +1,7 @@
-import { Alert, Keyboard, View } from 'react-native';
+import { Alert, View } from 'react-native';
 import { AppButton, AppInputText } from '../../../element';
 import { Control, FieldValues, useForm } from 'react-hook-form';
-import { useEffect } from 'react';
+
 import { useBottomSheet } from '../../../BottomSheetProvider';
 import { fetchApi } from '../../../utils';
 import { useKeyboardExpandSheet } from '../module/useKeyboardExpandSheet';
@@ -14,14 +14,10 @@ type TUserForm = {
 
 export function BottomSheetChangePassword({ logOut }: { logOut: () => void }) {
   const { control, handleSubmit, reset } = useForm<TUserForm>();
-  const { closeSheet, expandSheet, normalSheet } = useBottomSheet();
+  const { closeSheet } = useBottomSheet();
   useKeyboardExpandSheet(true, 1, 3);
 
-  const onSubmit = async ({
-    password,
-    newPassword,
-    confirmPassword,
-  }: TUserForm) => {
+  const onSubmit = async ({ password, newPassword }: TUserForm) => {
     const result = await fetchApi.changePassword({
       currentPassword: password,
       newPassword,

@@ -1,4 +1,4 @@
-import { View, StyleSheet, Image, Alert } from 'react-native';
+import { StyleSheet, Image, Alert } from 'react-native';
 import { Sizes } from '../../utils/resource/size';
 import { AnimatedButton } from './item/AnimatedButton';
 import { Control, FieldValues, useForm } from 'react-hook-form';
@@ -7,15 +7,12 @@ import { AccountService, fetchApi, MainScreenParamList } from '../../utils';
 import { AppInputText } from '../../element';
 import { useEffect } from 'react';
 import { AppAreaView } from '../../element/AppAreaView/AppAreaView';
-import { Colors } from '../../utils/resource/color';
-import { useAppTheme } from '../../hooks/useAppTheme';
 
 export type TLoginForm = { email: string; password: string };
 
 export default function Login() {
   const { control, handleSubmit } = useForm<TLoginForm>();
   const navigation = useNavigation<MainScreenParamList<'Home'>['navigation']>();
-  const { colors } = useAppTheme();
 
   const onSubmit = async ({ email, password }: TLoginForm) => {
     const resule = await fetchApi.login(email, password);

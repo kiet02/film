@@ -1,14 +1,5 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  Alert,
-  Switch,
-} from 'react-native';
-import { App } from '../../App';
+import React, { useCallback } from 'react';
+import { View, StyleSheet, Switch } from 'react-native';
 import { AppImage } from '../../element/AppImage/AppImage';
 import { Sizes } from '../../utils/resource/size';
 import { AppText } from '../../element/AppText';
@@ -16,20 +7,8 @@ import { useUser } from './module/useUser';
 import { AppButton } from '../../element';
 import { useTheme } from '../../ThemeProvider';
 import { useAppTheme } from '../../hooks/useAppTheme';
-import {
-  AccountService,
-  fetchApi,
-  MainScreenParamList,
-  TabBottomScreen,
-} from '../../utils';
-import BottomSheet, {
-  BottomSheetBackdrop,
-  BottomSheetTextInput,
-  BottomSheetView,
-} from '@gorhom/bottom-sheet';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { AccountService, TabBottomScreen } from '../../utils';
 import { useBottomSheet } from '../../BottomSheetProvider';
-import { Control, FieldValues, useForm } from 'react-hook-form';
 import { BottomSheetChangeName } from './item/BottomSheetChangeName';
 import { BottomSheetChangePassword } from './item/BottomSheetChangePassword';
 import {
@@ -37,17 +16,10 @@ import {
   useFocusEffect,
   useNavigation,
 } from '@react-navigation/native';
-import { Colors } from '../../utils/resource/color';
 import { AppAreaView } from '../../element/AppAreaView/AppAreaView';
 
-type TUserForm = {
-  name: string;
-  password: string;
-  confirmPassword: string;
-};
-
 export default function Account() {
-  const { data, refetch, isFetching } = useUser();
+  const { data, refetch } = useUser();
   const { openSheet, closeSheet } = useBottomSheet();
   const navigation = useNavigation<TabBottomScreen<'User'>['navigation']>();
   const { isDarkMode, toggleTheme } = useTheme();
@@ -105,7 +77,6 @@ export default function Account() {
           styleText={{
             color: colors.text.primary,
             fontSize: Sizes.wpx(25),
-            fontWeight: 'bold',
           }}
         />
       </View>

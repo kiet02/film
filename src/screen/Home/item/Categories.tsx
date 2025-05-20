@@ -2,94 +2,116 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Sizes } from '../../../utils/resource/size';
-import { Colors } from '../../../utils/resource/color';
 import { AppButton } from '../../../element';
 import { useNavigation } from '@react-navigation/native';
 import { MainScreenParamList } from '../../../utils';
+import { useAppTheme } from '../../../hooks/useAppTheme';
 
 export function Categories() {
   const navigation =
     useNavigation<MainScreenParamList<'Categories'>['navigation']>();
+  const { colors } = useAppTheme();
   return (
-    <View style={styles.container}>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <AppButton
-          title="Fantasy"
-          titileStyle={{
-            fontSize: 20,
-            fontWeight: 'bold',
-            color: 'black',
-            backgroundColor: Colors.categories.classic,
-          }}
-          ButtonStyle={styles.styleClassic}
-          TouchableType="TouchableOpacity"
-          onPress={() => navigation.navigate('Categories', { name: 'Fantasy' })}
-        />
-        <AppButton
-          title="Horror"
-          titileStyle={{
-            fontSize: 20,
-            fontWeight: 'bold',
-            color: 'black',
-            backgroundColor: Colors.categories.horror,
-          }}
-          ButtonStyle={styles.styleHorror}
-          TouchableType="TouchableOpacity"
-          onPress={() => navigation.navigate('Categories', { name: 'Horror' })}
-        />
-      </View>
-
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <AppButton
-          title="Adventure"
-          titileStyle={{
-            width: '120%',
-            height: Sizes.wpx(45),
-            fontWeight: 'bold',
-            fontSize: 20,
-            transform: [{ rotate: '-90deg' }],
-            color: 'black',
-            backgroundColor: Colors.categories.BSell,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-          ButtonStyle={styles.styleAventure}
-          TouchableType="TouchableOpacity"
-          onPress={() =>
-            navigation.navigate('Categories', { name: 'Adventure' })
-          }
-        />
-
-        <View style={{ justifyContent: 'space-between' }}>
+    <View style={{ alignItems: 'center' }}>
+      <View style={styles.container}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <AppButton
-            ButtonStyle={styles.styleScienceFiction}
+            title="Fantasy"
             titileStyle={{
               fontSize: 20,
               fontWeight: 'bold',
               color: 'black',
-              backgroundColor: Colors.categories.scienceFiction,
+              backgroundColor: colors.categories.classic,
             }}
+            ButtonStyle={[
+              styles.styleClassic,
+              { backgroundColor: colors.categories.classic },
+            ]}
             TouchableType="TouchableOpacity"
-            title="Science Fiction"
             onPress={() =>
-              navigation.navigate('Categories', { name: 'Science Fiction' })
+              navigation.navigate('Categories', { name: 'Fantasy' })
             }
           />
-
           <AppButton
-            ButtonStyle={styles.styleMore}
+            title="Horror"
             titileStyle={{
               fontSize: 20,
               fontWeight: 'bold',
               color: 'black',
-              backgroundColor: Colors.categories.more,
+              backgroundColor: colors.categories.horror,
             }}
-            title="All"
+            ButtonStyle={[
+              styles.styleHorror,
+              { backgroundColor: colors.categories.horror },
+            ]}
             TouchableType="TouchableOpacity"
             onPress={() =>
-              navigation.navigate('AllCategories', { name: 'All' })
+              navigation.navigate('Categories', { name: 'Horror' })
             }
           />
+        </View>
+
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          <AppButton
+            title="Adventure"
+            titileStyle={{
+              width: '120%',
+              height: Sizes.wpx(45),
+              fontWeight: 'bold',
+              fontSize: 20,
+              transform: [{ rotate: '-90deg' }],
+              color: 'black',
+              backgroundColor: colors.categories.BSell,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            ButtonStyle={[
+              styles.styleAventure,
+              { backgroundColor: colors.categories.BSell },
+            ]}
+            TouchableType="TouchableOpacity"
+            onPress={() =>
+              navigation.navigate('Categories', { name: 'Adventure' })
+            }
+          />
+
+          <View style={{ justifyContent: 'space-between' }}>
+            <AppButton
+              ButtonStyle={[
+                styles.styleScienceFiction,
+                { backgroundColor: colors.categories.scienceFiction },
+              ]}
+              titileStyle={{
+                fontSize: 20,
+                fontWeight: 'bold',
+                color: 'black',
+                backgroundColor: colors.categories.scienceFiction,
+              }}
+              TouchableType="TouchableOpacity"
+              title="Science Fiction"
+              onPress={() =>
+                navigation.navigate('Categories', { name: 'Science Fiction' })
+              }
+            />
+
+            <AppButton
+              ButtonStyle={[
+                styles.styleMore,
+                { backgroundColor: colors.categories.more },
+              ]}
+              titileStyle={{
+                fontSize: 20,
+                fontWeight: 'bold',
+                color: 'black',
+                backgroundColor: colors.categories.more,
+              }}
+              title="All"
+              TouchableType="TouchableOpacity"
+              onPress={() =>
+                navigation.navigate('AllCategories', { name: 'All' })
+              }
+            />
+          </View>
         </View>
       </View>
     </View>
@@ -105,7 +127,6 @@ const styles = StyleSheet.create({
   styleClassic: {
     width: Sizes.width(60),
     height: Sizes.height(10),
-    backgroundColor: Colors.categories.classic,
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
@@ -113,7 +134,6 @@ const styles = StyleSheet.create({
   styleHorror: {
     width: Sizes.width(34),
     height: Sizes.height(10),
-    backgroundColor: Colors.categories.horror,
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
@@ -121,7 +141,7 @@ const styles = StyleSheet.create({
   styleAventure: {
     width: Sizes.width(25),
     height: Sizes.height(33.2),
-    backgroundColor: Colors.categories.BSell,
+
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
@@ -129,7 +149,7 @@ const styles = StyleSheet.create({
   styleScienceFiction: {
     width: Sizes.width(68),
     height: Sizes.height(22),
-    backgroundColor: Colors.categories.scienceFiction,
+
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
@@ -137,7 +157,7 @@ const styles = StyleSheet.create({
   styleMore: {
     width: Sizes.width(68),
     height: Sizes.height(10.5),
-    backgroundColor: Colors.categories.more,
+
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',

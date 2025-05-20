@@ -1,6 +1,5 @@
 //import liraries
 import { useNavigation } from '@react-navigation/native';
-import { ChevronLeft, Icon, Settings2 } from 'lucide-react-native';
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { AppIcon } from '../../../element/AppIcon/AppIcon';

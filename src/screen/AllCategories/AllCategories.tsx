@@ -10,18 +10,8 @@ import { AllCategoriesHeader } from './item/AllCategoriesHeader';
 import { MainScreenParamList } from '../../utils';
 import { useNavigation } from '@react-navigation/native';
 import { useAllCategories } from './module/useAllCategories';
-import { Colors } from '../../utils/resource/color';
 import { AppAreaView } from '../../element/AppAreaView/AppAreaView';
 import { useAppTheme } from '../../hooks/useAppTheme';
-
-const categories = [
-  { id: '1', name: 'Action' },
-  { id: '2', name: 'Comedy' },
-  { id: '3', name: 'Drama' },
-  { id: '4', name: 'Horror' },
-  { id: '5', name: 'Romance' },
-  { id: '6', name: 'Sci-Fi' },
-];
 
 function AllCategories() {
   const { data, isLoading } = useAllCategories();

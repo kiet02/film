@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Image, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Image, View } from 'react-native';
 import { AppText } from '../../element/AppText';
 import { Sizes } from '../../utils/resource/size';
 import { BookHeader } from './item/BookHeader';

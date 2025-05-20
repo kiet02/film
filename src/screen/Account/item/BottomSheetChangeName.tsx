@@ -1,10 +1,8 @@
-import { Alert, Keyboard, View } from 'react-native';
+import { Alert, View } from 'react-native';
 import { AppButton, AppInputText } from '../../../element';
 import { Control, FieldValues, useForm } from 'react-hook-form';
 import { fetchApi } from '../../../utils';
 import { useBottomSheet } from '../../../BottomSheetProvider';
-import { useEffect, useCallback } from 'react';
-import { useFocusEffect } from '@react-navigation/native';
 import { useKeyboardExpandSheet } from '../module/useKeyboardExpandSheet';
 
 type TUserForm = {
@@ -17,7 +15,7 @@ type TUserFormChangeName = {
 
 export function BottomSheetChangeName({ refetch }: TUserFormChangeName) {
   const { control, handleSubmit, reset } = useForm<TUserForm>();
-  const { closeSheet, expandSheet, normalSheet } = useBottomSheet();
+  const { closeSheet } = useBottomSheet();
   useKeyboardExpandSheet(true, 0, 2);
 
   const onSubmit = async ({ changeName }: TUserForm) => {
@@ -28,10 +26,6 @@ export function BottomSheetChangeName({ refetch }: TUserFormChangeName) {
       reset();
       closeSheet(); // Đóng BottomSheet sau khi thành công
     }
-    console.log(result.msg);
-    console.log('====================================');
-    console.log(result.err);
-    console.log('====================================');
   };
 
   return (

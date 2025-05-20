@@ -1,14 +1,10 @@
-//import liraries
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useAppTheme } from '../../../hooks/useAppTheme';
 import { AppIcon } from '../../../element/AppIcon/AppIcon';
 
-// create a component
 export function BookHeader() {
   const navigation = useNavigation();
-  const { colors } = useAppTheme();
 
   return (
     <View style={styles.header}>

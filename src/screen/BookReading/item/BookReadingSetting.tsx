@@ -18,7 +18,6 @@ interface BookReadingSettingProps {
 
 export function BookReadingSetting({
   sheetRef,
-  isSettingsVisible,
   setIsSettingsVisible,
   toggleSettings,
   fontSize,
@@ -41,9 +40,14 @@ export function BookReadingSetting({
     >
       <BottomSheetView style={styles.sheetContent}>
         <BookReadingSettingHeader toggleSettings={toggleSettings} />
-        <BookReadingSettingBackground bgColor={bgColor} setBgColor={setBgColor} />
+        <BookReadingSettingBackground
+          bgColor={bgColor}
+          setBgColor={setBgColor}
+        />
 
-        <Text style={styles.optionLabel}>Font Size: {Math.round(fontSize)}px</Text>
+        <Text style={styles.optionLabel}>
+          Font Size: {Math.round(fontSize)}px
+        </Text>
         <View style={styles.sliderContainer}>
           <Text style={[styles.sliderValue, { fontSize: 14 }]}>A</Text>
           <Slider
@@ -51,7 +55,6 @@ export function BookReadingSetting({
             minimumValue={14}
             maximumValue={32}
             step={0.5}
-           
             onValueChange={setFontSize}
             minimumTrackTintColor="#1fb28a"
             maximumTrackTintColor="#ccc"
@@ -73,9 +76,9 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  sheetContent: { 
-    padding: 16, 
-    flex: 1 
+  sheetContent: {
+    padding: 16,
+    flex: 1,
   },
   optionLabel: {
     fontSize: 16,
@@ -89,12 +92,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginBottom: 20,
   },
-  slider: { 
-    flex: 1, 
-    marginHorizontal: 15, 
-    height: 40 
+  slider: {
+    flex: 1,
+    marginHorizontal: 15,
+    height: 40,
   },
-  sliderValue: { 
-    fontWeight: '500' 
+  sliderValue: {
+    fontWeight: '500',
   },
-}); 
+});

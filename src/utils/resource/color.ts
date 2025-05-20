@@ -1,30 +1,33 @@
+// colors.ts
 const Colors = {
-  background: '#fcf3de',
-  bottomTab: '#000000',
-  tabFocus: '#ffffff',
-  categories: {
-    BSell: '#e3d6fb',
-    classic: '#faded7',
-    horror: '#f9f7da',
-    scienceFiction: '#d8f2fb',
-    more: '#f7f7f7',
-  },
-  explore: {
-    item: '#f7f7f7',
-  },
-  text: {
-    primary: '#000000',
-    secondary: '#4d4d4d',
-    tertiary: '#808080',
-  },
-  surface: {
-    primary: '#ffffff',
-    secondary: '#f7f7f7',
-    tertiary: '#e6e6e6',
-  },
-  border: {
-    primary: '#e6e6e6',
-    secondary: '#f7f7f7',
+  light: {
+    background: '#fcf3de',
+    bottomTab: '#000000',
+    tabFocus: '#ffffff',
+    categories: {
+      BSell: '#e3d6fb',
+      classic: '#faded7',
+      horror: '#f9f7da',
+      scienceFiction: '#d8f2fb',
+      more: '#f7f7f7',
+    },
+    explore: {
+      item: '#f7f7f7',
+    },
+    text: {
+      primary: '#000000',
+      secondary: '#4d4d4d',
+      tertiary: '#808080',
+    },
+    surface: {
+      primary: '#ffffff',
+      secondary: '#f7f7f7',
+      tertiary: '#e6e6e6',
+    },
+    border: {
+      primary: '#e6e6e6',
+      secondary: '#f7f7f7',
+    },
   },
   dark: {
     background: '#121212',
@@ -74,13 +77,13 @@ const CUSTOM_COLORS_KEY = 'customColors';
 export type ColorMode = 'light' | 'dark';
 
 export type CustomColors = {
-  light: Partial<Omit<ColorScheme, 'dark'>>;
-  dark: Partial<ColorScheme['dark']>;
+  light?: Partial<ColorScheme['light']>;
+  dark?: Partial<ColorScheme['dark']>;
 };
 
 const getColorMode = async (): Promise<ColorMode> => {
   const savedMode = await storage.getStringAsync(COLOR_MODE_KEY);
-  return (savedMode as ColorMode) || 'light';
+  return savedMode === 'dark' || savedMode === 'light' ? savedMode : 'light';
 };
 
 const setColorMode = (mode: ColorMode) => {
@@ -89,7 +92,11 @@ const setColorMode = (mode: ColorMode) => {
 
 const getCustomColors = async (): Promise<CustomColors | null> => {
   const savedColors = await storage.getStringAsync(CUSTOM_COLORS_KEY);
-  return savedColors ? JSON.parse(savedColors) : null;
+  try {
+    return savedColors ? JSON.parse(savedColors) : null;
+  } catch (e) {
+    return null;
+  }
 };
 
 const setCustomColors = (colors: CustomColors) => {
@@ -99,12 +106,12 @@ const setCustomColors = (colors: CustomColors) => {
 const getBackgroundColor = async () => {
   const mode = await getColorMode();
   const customColors = await getCustomColors();
-  if (customColors) {
-    return mode === 'dark'
-      ? customColors.dark?.background || Colors.dark.background
-      : customColors.light?.background || Colors.background;
+
+  if (mode === 'dark') {
+    return customColors?.dark?.background || Colors.dark.background;
+  } else {
+    return customColors?.light?.background || Colors.light.background;
   }
-  return mode === 'dark' ? Colors.dark.background : Colors.background;
 };
 
 export {

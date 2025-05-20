@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  View,
-  FlatList,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import { FlatList, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { AppText } from '../../element/AppText';
 import { Sizes } from '../../utils/resource/size';
 import { BookSaveHeader } from './item/BookSaveHeader';

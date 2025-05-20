@@ -1,14 +1,14 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { View } from 'react-native';
 import { AppInputText } from '../../../element';
 import { useFormContext } from 'react-hook-form';
 import { Sizes } from '../../../utils/resource/size';
-import { Colors } from '../../../utils/resource/color';
+
+import { useAppTheme } from '../../../hooks/useAppTheme';
 type TSearch = { search?: string };
 export function HomeHeader() {
   const { control } = useFormContext<TSearch>();
-
+  const { colors } = useAppTheme();
   return (
     <View>
       <AppInputText
@@ -18,11 +18,11 @@ export function HomeHeader() {
         icon="Search"
         placeholderTextColor={'black'}
         inputStyle={{
-          backgroundColor: Colors.explore.item,
+          backgroundColor: colors.explore.item,
           width: Sizes.width(95),
         }}
         textStyle={{
-          backgroundColor: Colors.explore.item,
+          backgroundColor: colors.explore.item,
         }}
       />
     </View>

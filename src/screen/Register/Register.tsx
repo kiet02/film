@@ -3,9 +3,8 @@ import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { AppButton, AppInputText } from '../../element';
 import { AccountService, fetchApi, MainScreenParamList } from '../../utils';
-import { Control, FieldValues, useForm, useFormContext } from 'react-hook-form';
+import { Control, FieldValues, useForm } from 'react-hook-form';
 import { AppAreaView } from '../../element/AppAreaView/AppAreaView';
-import { Colors } from '../../utils/resource/color';
 import { useAppTheme } from '../../hooks/useAppTheme';
 
 type TRegisterForm = {
@@ -41,7 +40,7 @@ const Register = () => {
   };
 
   return (
-    <AppAreaView>
+    <AppAreaView style={{ justifyContent: 'center' }}>
       <Text style={styles.title}>Create New Account</Text>
 
       <AppInputText
@@ -116,7 +115,7 @@ const Register = () => {
       <View style={styles.footer}>
         <Text>Already have an account? </Text>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={styles.linkText}>Login here</Text>
+          <Text style={{ color: colors.text.primary }}>Login here</Text>
         </TouchableOpacity>
       </View>
     </AppAreaView>
@@ -143,9 +142,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     marginTop: 20,
-  },
-  linkText: {
-    color: Colors.text.primary,
   },
 });
 
