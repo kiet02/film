@@ -1,12 +1,20 @@
 import React, { useMemo } from 'react';
-import { StyleSheet, View, Text, Platform } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Platform,
+  TouchableOpacity,
+} from 'react-native';
 import BottomSheet, {
   BottomSheetBackdrop,
+  BottomSheetFlatList,
   BottomSheetView,
 } from '@gorhom/bottom-sheet';
 import Slider from '@react-native-community/slider';
 import { BookReadingSettingHeader } from './BookReadingSettingHeader';
 import { BookReadingSettingBackground } from './BookReadingSettingBackground';
+import { useFormContext } from 'react-hook-form';
 
 interface BookReadingSettingProps {
   sheetRef: React.RefObject<BottomSheet>;
@@ -15,17 +23,32 @@ interface BookReadingSettingProps {
   setFontSize: (value: number) => void;
   bgColor: string;
   setBgColor: (value: string) => void;
+  data: Array<{ id: string | number; chapter: string }>;
 }
 
-export function BookReadingSetting({
+export function BookReadingChapter({
   sheetRef,
   toggleSettings,
   fontSize,
   setFontSize,
   bgColor,
   setBgColor,
+  data,
 }: BookReadingSettingProps) {
   const snapPoints = useMemo(() => ['20%'], []);
+  const { control, setValue } = useFormContext();
+  const renderItem = ({
+    item,
+  }: {
+    item: { id: string | number; chapter: string };
+  }) => (
+    <TouchableOpacity
+      style={styles.sliderContainer}
+      onPress={() => setValue('chapter', item.id)}
+    >
+      <Text style={styles.optionLabel}>{item.chapter}</Text>
+    </TouchableOpacity>
+  );
 
   return (
     <BottomSheet
@@ -46,30 +69,11 @@ export function BookReadingSetting({
       enableHandlePanningGesture={false}
     >
       <BottomSheetView style={styles.sheetContent}>
-        <BookReadingSettingHeader toggleSettings={toggleSettings} />
-        <BookReadingSettingBackground
-          bgColor={bgColor}
-          setBgColor={setBgColor}
+        <BottomSheetFlatList
+          data={data}
+          keyExtractor={(item: any) => item.id}
+          renderItem={renderItem}
         />
-
-        <Text style={styles.optionLabel}>
-          Font Size: {Math.round(fontSize)}px
-        </Text>
-        <View style={styles.sliderContainer}>
-          <Text style={[styles.sliderValue, { fontSize: 14 }]}>A</Text>
-          <Slider
-            style={styles.slider}
-            minimumValue={14}
-            maximumValue={32}
-            step={0.5}
-            onValueChange={setFontSize}
-            minimumTrackTintColor="#1fb28a"
-            maximumTrackTintColor="#ccc"
-            thumbTintColor="#1fb28a"
-            {...(Platform.OS === 'ios' ? { tapToSeek: true } : {})}
-          />
-          <Text style={[styles.sliderValue, { fontSize: 32 }]}>A</Text>
-        </View>
       </BottomSheetView>
     </BottomSheet>
   );

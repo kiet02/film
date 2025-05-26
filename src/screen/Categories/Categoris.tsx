@@ -8,10 +8,12 @@ import {
 } from 'react-native';
 import { AppText } from '../../element/AppText';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { RootStackScreenProps } from '../../utils';
+import { MainScreenParamList, RootStackScreenProps } from '../../utils';
 import { CategoriesHeader } from './item/CategoriesHeader';
 import { useCategories } from './module/useCategories';
 import { AppAreaView } from '../../element/AppAreaView/AppAreaView';
+import { useTheme } from '../../ThemeProvider';
+import { useAppTheme } from '../../hooks/useAppTheme';
 
 type Category = {
   id: string;
@@ -21,13 +23,18 @@ type Category = {
 };
 
 export const Categories = () => {
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<MainScreenParamList<'Categories'>['navigation']>();
   const route = useRoute<RootStackScreenProps<'Categories'>['route']>();
   const name = route.params?.name;
+  const { colors } = useAppTheme();
   const { data, isLoading } = useCategories(name);
 
   const renderItem = ({ item }: { item: Category }) => (
-    <TouchableOpacity style={styles.categoryCard}>
+    <TouchableOpacity
+      style={[styles.categoryCard, { backgroundColor: colors.box }]}
+      onPress={() => navigation.navigate('Book', { id: item.id })}
+    >
       <View style={styles.rowContainer}>
         <Image
           source={{ uri: item.imageUrl }}

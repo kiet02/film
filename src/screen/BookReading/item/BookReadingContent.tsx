@@ -8,12 +8,14 @@ interface BookReadingContentProps {
   fontSize: number;
   bgColor: string;
   animatedTextStyle: any;
+  content: string;
 }
 
 export function BookReadingContent({
   fontSize,
   bgColor,
   animatedTextStyle,
+  content,
 }: BookReadingContentProps) {
   return (
     <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={true}>
@@ -27,8 +29,7 @@ export function BookReadingContent({
             },
           ]}
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          {content}
         </AnimatedText>
       </View>
     </ScrollView>

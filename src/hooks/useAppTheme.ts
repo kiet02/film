@@ -95,6 +95,7 @@ export const useAppTheme = () => {
       },
       bottomTab: getColor(Colors.light.bottomTab, Colors.dark.bottomTab),
       tabFocus: getColor(Colors.light.tabFocus, Colors.dark.tabFocus),
+      box: getColor(Colors.light.box, Colors.dark.box),
       categories: {
         BSell: getColor(
           Colors.light.categories.BSell,

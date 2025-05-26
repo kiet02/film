@@ -71,7 +71,6 @@ export function AppButton({
         <Text
           style={[
             {
-              backgroundColor: colors.surface.primary,
               color: colors.text.primary,
               textAlign: 'center',
             },

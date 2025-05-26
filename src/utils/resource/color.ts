@@ -4,6 +4,7 @@ const Colors = {
     background: '#fcf3de',
     bottomTab: '#000000',
     tabFocus: '#ffffff',
+    box: '#ffffff',
     categories: {
       BSell: '#e3d6fb',
       classic: '#faded7',
@@ -33,6 +34,7 @@ const Colors = {
     background: '#121212',
     bottomTab: '#ffffff',
     tabFocus: '#000000',
+    box: '#2d2d2d',
     categories: {
       BSell: '#2a1b6b',
       classic: '#6b2d1f',

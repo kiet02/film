@@ -1,7 +1,7 @@
 import AllCategories from '../../../screen/AllCategories/AllCategories';
 import { AccountService } from '../Account';
 import { Apis } from '../Apis';
-import { TBook, TGenre, TUpdateUser, TUser } from './types';
+import { TBook, TChapter, TGenre, TUpdateUser, TUser } from './types';
 
 const commonCall = async <T>(
   api: string,
@@ -53,7 +53,7 @@ const fetchApi = {
     const option: RequestInit = {
       method: 'GET',
     };
-    const response = commonCall<TBook>(Apis.getExplore, option);
+    const response = commonCall<TBook[]>(Apis.getExplore, option);
     return response;
   },
   Categories: (name: string) => () => {
@@ -80,6 +80,14 @@ const fetchApi = {
     const response = commonCall<TUser>(Apis.getUser, option);
     return response;
   },
+  Book: (id: number | string) => () => {
+    const option: RequestInit = {
+      method: 'GET',
+      // body: JSON.stringify({name})
+    };
+    const response = commonCall<TBook>(Apis.getBooK(id), option);
+    return response;
+  },
   UpdateUser: (name?: string, image?: string) => {
     const option: RequestInit = {
       method: 'PUT',
@@ -102,6 +110,23 @@ const fetchApi = {
     const response = commonCall<TUpdateUser>(Apis.getChangePassword, option);
     return response;
   },
+
+  Chapter: (id: number | string, BookId: number | string) => () => {
+    const option: RequestInit = {
+      method: 'GET',
+      // body: JSON.stringify({name})
+    };
+    const response = commonCall<TChapter>(Apis.getChapter(id, BookId), option);
+    return response;
+  },
+  ChapterAll: (BookId: number | string) => () => {
+    const option: RequestInit = {
+      method: 'GET',
+      // body: JSON.stringify({name})
+    };
+    const response = commonCall<TChapter[]>(Apis.getChapterAll(BookId), option);
+    return response;
+  },
 };
 
 const ApiKeys = {
@@ -111,5 +136,8 @@ const ApiKeys = {
   categories: 'categories',
   AllCategories: 'AllCategories',
   user: 'user',
+  book: 'book',
+  chapter: 'chapter',
+  chapterAll: 'chapterAll',
 };
 export { fetchApi, ApiKeys };

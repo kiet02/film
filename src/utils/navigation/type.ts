@@ -6,6 +6,7 @@ export type RootStackParamList = {
   MainApp: { id: number };
   MainHome: { id: number };
   Categories: { name: string };
+  Book: { id: number | string };
 };
 
 export type AllScreenStackParamList = {
@@ -20,8 +21,11 @@ export type AllScreenStackParamList = {
   Categories: { name: string };
   AllCategories: { name: string };
   User: undefined;
-  Book: undefined;
-  BookReading: undefined;
+  Book: { id: number | string };
+  BookReading: {
+    id: number | string | undefined;
+    BookId: number | string | undefined;
+  };
 };
 
 export type TabBottomStackParam = {

@@ -33,23 +33,21 @@ export type TGenre = {
   name: string;
   createdAt: string;
   updatedAt: string;
-  Books: TBook;
+  Books: TBook[];
 };
 
-export type TBook = [
-  {
-    id: number;
-    name: string;
-    img: string;
-    describe: string;
-    createdAt: string;
-    updatedAt: string;
-    authorId: number;
-    genreId: number;
-    Author: TAuthor;
-    Genre: TGenre;
-  }
-];
+export type TBook = {
+  id: number;
+  name: string;
+  img: string;
+  describe: string;
+  createdAt: string;
+  updatedAt: string;
+  authorId: number;
+  genreId: number;
+  Author: TAuthor;
+  Genre: TGenre;
+};
 export type TUpdateUser = {
   err: number;
   msg: string;
@@ -63,4 +61,12 @@ export type TUpdateUser = {
     createdAt: string;
     updatedAt: string;
   };
+};
+export type TChapter = {
+  id: number;
+  chapter: string;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+  BookId: number;
 };

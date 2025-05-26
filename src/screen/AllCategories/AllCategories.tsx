@@ -44,20 +44,22 @@ function AllCategories() {
   }
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <AllCategoriesHeader
-        name="All Categories"
-        onPress={() => navigation.goBack()}
-      />
-      <FlatList
-        data={data as unknown as ArrayLike<{ id: string; name: string }>}
-        renderItem={renderCategory}
-        keyExtractor={item => item.id}
-        numColumns={2}
-        columnWrapperStyle={styles.row}
-        contentContainerStyle={{ padding: 10 }}
-      />
-    </View>
+    <AppAreaView>
+      <View style={[styles.container, { backgroundColor: colors.background }]}>
+        <AllCategoriesHeader
+          name="All Categories"
+          onPress={() => navigation.goBack()}
+        />
+        <FlatList
+          data={data as unknown as ArrayLike<{ id: string; name: string }>}
+          renderItem={renderCategory}
+          keyExtractor={item => item.id}
+          numColumns={2}
+          columnWrapperStyle={styles.row}
+          contentContainerStyle={{ padding: 10 }}
+        />
+      </View>
+    </AppAreaView>
   );
 }
 

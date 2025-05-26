@@ -8,16 +8,17 @@ import { useExplore } from '../module/useExplore';
 import { AppImage } from '../../../element/AppImage/AppImage';
 import { useLoader } from '../../../element/AppLoad/LoaderContext';
 import { useAppTheme } from '../../../hooks/useAppTheme';
+import { useNavigation } from '@react-navigation/native';
+import { MainScreenParamList, TBook } from '../../../utils';
 
 export function ListExplore() {
   const { data } = useExplore();
   const { colors } = useAppTheme();
-  const { showLoader, hideLoader } = useLoader();
-
-  const handleLoad = async () => {
-    showLoader();
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    hideLoader();
+  const navigation = useNavigation<MainScreenParamList<'Book'>['navigation']>();
+  const handleLoad = (id: number) => {
+    navigation.navigate('Book', {
+      id: id,
+    });
   };
 
   return (
@@ -30,7 +31,7 @@ export function ListExplore() {
         renderItem={({ item }) => (
           <TouchableOpacity
             style={[styles.item, { backgroundColor: colors.explore.item }]}
-            onPress={handleLoad}
+            onPress={() => handleLoad(item?.id)}
           >
             <AppImage uri={item?.img} styles={styles.image} />
             <View>
@@ -43,7 +44,6 @@ export function ListExplore() {
                 }}
                 text={item?.name}
                 numberOfLines={1}
-                ellipsizeMode="tail"
               />
               <AppText key={'author'} text={item.Author?.name} />
             </View>

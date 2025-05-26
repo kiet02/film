@@ -3,16 +3,21 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { AppIcon } from '../../../element/AppIcon/AppIcon';
+import { AppButton } from '../../../element';
 
 type BookReadingHeaderProps = {
   bgColor: string;
   toggleSettings: () => void;
+  title: string;
+  titlePress: () => void;
 };
 
 // create a component
 export function BookReadingHeader({
   bgColor,
   toggleSettings,
+  title,
+  titlePress,
 }: BookReadingHeaderProps) {
   const navigation = useNavigation();
 
@@ -25,6 +30,19 @@ export function BookReadingHeader({
           size={24}
         />
       </TouchableOpacity>
+
+      <AppButton
+        title={title}
+        onPress={titlePress}
+        titileStyle={{
+          color: bgColor === '#000000' ? '#ffffff' : '#000000',
+          fontSize: 24,
+          fontWeight: 'bold',
+        }}
+        style={{ backgroundColor: 'transparent', padding: 0, marginLeft: 8 }}
+        TouchableType="TouchableOpacity"
+      />
+
       <TouchableOpacity onPress={toggleSettings}>
         <AppIcon
           name="Settings2"
