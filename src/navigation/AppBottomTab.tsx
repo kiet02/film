@@ -12,7 +12,7 @@ export function AppBottomTab() {
 
   return (
     <Tab.Navigator
-      initialRouteName="House"
+      initialRouteName="User"
       tabBar={props => <CustomTabBar {...props} />}
     >
       <Tab.Screen

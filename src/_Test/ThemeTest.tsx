@@ -113,7 +113,7 @@ export const useColorScheme = () => {
       });
       // 6. transition
       transition.value = 0;
-      transition.value = withTiming(1, { duration: 650 });
+      transition.value = withTiming(1, { duration: 450 });
       await wait(650);
       dispatch({
         active: false,
@@ -169,20 +169,29 @@ export const ColorSchemeProvider = ({ children }: ColorSchemeProviderProps) => {
 
       {active && (
         <Canvas style={[StyleSheet.absoluteFill]} pointerEvents="none">
-          <Image image={overlay1} x={0} y={0} width={width} height={height} />
-
-          {overlay2 && (
-            <Circle c={circle} r={r}>
-              <ImageShader
-                image={overlay2}
+          <>
+            {overlay1 && (
+              <Image
+                image={overlay1}
                 x={0}
                 y={0}
                 width={width}
                 height={height}
-                fit="cover"
               />
-            </Circle>
-          )}
+            )}
+            {overlay2 && (
+              <Circle c={circle} r={r}>
+                <ImageShader
+                  image={overlay2}
+                  x={0}
+                  y={0}
+                  width={width}
+                  height={height}
+                  fit="cover"
+                />
+              </Circle>
+            )}
+          </>
         </Canvas>
       )}
     </View>

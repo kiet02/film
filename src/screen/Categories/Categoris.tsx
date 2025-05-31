@@ -12,7 +12,6 @@ import { MainScreenParamList, RootStackScreenProps } from '../../utils';
 import { CategoriesHeader } from './item/CategoriesHeader';
 import { useCategories } from './module/useCategories';
 import { AppAreaView } from '../../element/AppAreaView/AppAreaView';
-import { useTheme } from '../../ThemeProvider';
 import { useAppTheme } from '../../hooks/useAppTheme';
 
 type Category = {

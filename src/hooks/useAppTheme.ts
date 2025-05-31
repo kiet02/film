@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
-import { useTheme } from '../ThemeProvider';
+
 import {
   Colors,
   CustomColors,
   getCustomColors,
   setCustomColors,
 } from '../utils/resource/color';
+import { useColorScheme } from '../ThemeProvider';
 
 type ColorValue = string;
 
 export const useAppTheme = () => {
-  const { isDarkMode } = useTheme();
+  const { colorScheme } = useColorScheme();
   const [customColors, setCustomColorsState] = useState<CustomColors | null>(
     null
   );
@@ -35,8 +36,8 @@ export const useAppTheme = () => {
     lightColor: ColorValue,
     darkColor: ColorValue
   ): ColorValue => {
-    const mode = isDarkMode ? 'dark' : 'light';
-    const defaultColor = isDarkMode ? darkColor : lightColor;
+    const mode = colorScheme === 'dark' ? 'dark' : 'light';
+    const defaultColor = colorScheme === 'dark' ? darkColor : lightColor;
 
     if (customColors) {
       const modeColors = customColors[mode];
@@ -50,7 +51,7 @@ export const useAppTheme = () => {
   };
 
   return {
-    isDarkMode,
+    colorScheme,
     customColors,
     updateCustomColors,
     colors: {

@@ -4,15 +4,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { FormProvider, useForm } from 'react-hook-form';
 import { AppAllNavigation } from './src/navigation/AppAllNavigation';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { BottomSheetProvider } from './src/BottomSheetProvider';
 import { LoaderProvider } from './src/element/AppLoad/LoaderContext';
-import { ThemeProvider } from './src/ThemeProvider';
-import {
-  SafeAreaProvider,
-  SafeAreaView,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
-import { StatusBar, View } from 'react-native';
+import { ColorSchemeProvider } from './src/ThemeProvider';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const queryClient = new QueryClient();
 
@@ -22,15 +16,15 @@ const AppProvider = () => {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
         <QueryClientProvider client={queryClient}>
-          <ThemeProvider>
-            <LoaderProvider>
-              <FormProvider {...methods}>
+          <LoaderProvider>
+            <FormProvider {...methods}>
+              <ColorSchemeProvider>
                 <NavigationContainer>
                   <AppAllNavigation />
                 </NavigationContainer>
-              </FormProvider>
-            </LoaderProvider>
-          </ThemeProvider>
+              </ColorSchemeProvider>
+            </FormProvider>
+          </LoaderProvider>
         </QueryClientProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
