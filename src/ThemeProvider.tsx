@@ -18,7 +18,7 @@ import {
   useReducer,
   useRef,
 } from 'react';
-import { Dimensions, StyleSheet, View } from 'react-native';
+import { Dimensions, StatusBar, StyleSheet, View } from 'react-native';
 import {
   SharedValue,
   useDerivedValue,
@@ -38,6 +38,7 @@ interface ColorScheme {
   overlay1: SkImage | null;
   overlay2: SkImage | null;
   colorScheme: string | null;
+  statusBar: string | null;
 }
 
 interface ColorSchemeContextP extends ColorScheme {
@@ -52,6 +53,7 @@ const defaultValue: ColorScheme = {
   overlay1: null,
   overlay2: null,
   colorScheme: null,
+  statusBar: null,
 };
 
 const ColorSchemeContext = createContext<ColorSchemeContextP | null>(null);
@@ -81,6 +83,7 @@ export const useColorScheme = () => {
         overlay1,
         overlay2: null,
         colorScheme,
+        statusBar: null,
       });
 
       await wait(100);
@@ -89,6 +92,7 @@ export const useColorScheme = () => {
         overlay1,
         overlay2: null,
         colorScheme: newColorScheme,
+        statusBar: newColorScheme,
       });
       await wait(100);
 
@@ -99,6 +103,7 @@ export const useColorScheme = () => {
         overlay1,
         overlay2,
         colorScheme: newColorScheme,
+        statusBar: newColorScheme,
       });
 
       transition.value = 0;
@@ -111,6 +116,7 @@ export const useColorScheme = () => {
         overlay1: null,
         overlay2: null,
         colorScheme: newColorScheme,
+        statusBar: newColorScheme,
       });
     } catch (err) {
       console.error('Failed to make image from view:', err);
@@ -121,10 +127,8 @@ export const useColorScheme = () => {
 };
 
 export const ColorSchemeProvider = ({ children }: { children: ReactNode }) => {
-  const [{ active, overlay1, overlay2, colorScheme }, dispatch] = useReducer(
-    ColorSchemeReducer,
-    defaultValue
-  );
+  const [{ active, overlay1, overlay2, colorScheme, statusBar }, dispatch] =
+    useReducer(ColorSchemeReducer, defaultValue);
 
   const ref = useRef<View>(null);
   const circle = useSharedValue({ x: 0, y: 0, r: 0 });
@@ -145,6 +149,7 @@ export const ColorSchemeProvider = ({ children }: { children: ReactNode }) => {
         overlay1: null,
         overlay2: null,
         colorScheme: savedMode,
+        statusBar: savedMode,
       });
     };
     loadInitialMode();
@@ -158,6 +163,11 @@ export const ColorSchemeProvider = ({ children }: { children: ReactNode }) => {
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1 }} collapsable={false} ref={ref}>
+        <StatusBar
+          barStyle={statusBar === 'dark' ? 'light-content' : 'dark-content'}
+          backgroundColor="transparent"
+          translucent
+        />
         <ColorSchemeContext.Provider
           value={{
             dispatch,
@@ -168,6 +178,7 @@ export const ColorSchemeProvider = ({ children }: { children: ReactNode }) => {
             colorScheme,
             circle,
             transition,
+            statusBar,
           }}
         >
           {children}
