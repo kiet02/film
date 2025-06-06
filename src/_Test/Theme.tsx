@@ -4,7 +4,7 @@ import {
   createTheme,
   useTheme as useThemeRS,
 } from '@shopify/restyle';
-import { ColorSchemeName } from './ThemeTest';
+import { ColorSchemeName } from 'react-native';
 
 const palette = {
   black: '#0B0B0B',

@@ -1,14 +1,12 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React from 'react';
-// import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { FormProvider, useForm } from 'react-hook-form';
-// import { AppAllNavigation } from './src/navigation/AppAllNavigation';
+import { AppAllNavigation } from './src/navigation/AppAllNavigation';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { LoaderProvider } from './src/element/AppLoad/LoaderContext';
-// import { ColorSchemeProvider } from './src/ThemeProvider';
+import { ColorSchemeProvider } from './src/ThemeProvider';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { ColorSchemeProvider } from './src/_Test/ThemeTest';
-import { ColorSchemeButton } from './src/_Test/Test';
 
 const queryClient = new QueryClient();
 
@@ -21,10 +19,9 @@ const AppProvider = () => {
           <LoaderProvider>
             <FormProvider {...methods}>
               <ColorSchemeProvider>
-                {/* <NavigationContainer>
+                <NavigationContainer>
                   <AppAllNavigation />
-                </NavigationContainer> */}
-                <ColorSchemeButton />
+                </NavigationContainer>
               </ColorSchemeProvider>
             </FormProvider>
           </LoaderProvider>

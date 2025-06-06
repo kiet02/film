@@ -4,11 +4,11 @@ import { AppInputText } from '../../../element';
 import { useFormContext } from 'react-hook-form';
 import { Sizes } from '../../../utils/resource/size';
 
-import { useAppTheme } from '../../../hooks/useAppTheme';
+// import { useAppTheme } from '../../../hooks/useAppTheme';
 type TSearch = { search?: string };
 export function HomeHeader() {
   const { control } = useFormContext<TSearch>();
-  const { colors } = useAppTheme();
+  // const { colors } = useAppTheme();
   return (
     <View>
       <AppInputText
@@ -18,11 +18,12 @@ export function HomeHeader() {
         icon="Search"
         placeholderTextColor={'black'}
         inputStyle={{
-          backgroundColor: colors.explore.item,
+          backgroundColor: 'white',
           width: Sizes.width(95),
+          alignSelf: 'center',
         }}
         textStyle={{
-          backgroundColor: colors.explore.item,
+          backgroundColor: 'white',
         }}
       />
     </View>

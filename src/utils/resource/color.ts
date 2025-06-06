@@ -31,33 +31,33 @@ const Colors = {
     },
   },
   dark: {
-    background: '#121212',
-    bottomTab: '#ffffff',
-    tabFocus: '#000000',
-    box: '#2d2d2d',
+    background: '#1e1e1e', // Màu nền chính (xám đậm vừa phải)
+    bottomTab: '#ffffff', // Icon tab trắng trên nền đen
+    tabFocus: '#0a84ff', // Màu xanh dương nổi bật khi focus
+    box: '#2c2c2e', // Hộp hiển thị (xám đậm hơn nền 1 chút)
     categories: {
-      BSell: '#2a1b6b',
-      classic: '#6b2d1f',
-      horror: '#4b4a2d',
-      scienceFiction: '#1b4d6b',
-      more: '#2d2d2d',
+      BSell: '#8e8cff', // Tím nhạt (Best Seller)
+      classic: '#ffb38a', // Cam sáng nhạt (Classic)
+      horror: '#c2c884', // Vàng-xanh sáng (Horror)
+      scienceFiction: '#7fd3ff', // Xanh lam nhạt (Sci-Fi)
+      more: '#3a3a3c', // Xám trung tính (All/more)
     },
     explore: {
-      item: '#2d2d2d',
+      item: '#3a3a3c', // Khối item nhẹ hơn nền
     },
     text: {
-      primary: '#ffffff',
-      secondary: '#b3b3b3',
-      tertiary: '#808080',
+      primary: '#ffffff', // Văn bản chính
+      secondary: '#d1d1d6', // Văn bản phụ
+      tertiary: '#a1a1a1', // Văn bản thứ ba
     },
     surface: {
-      primary: '#1e1e1e',
-      secondary: '#2d2d2d',
-      tertiary: '#404040',
+      primary: '#2c2c2e', // Màu bề mặt chính (card, modal)
+      secondary: '#3a3a3c', // Màu bề mặt phụ
+      tertiary: '#48484a', // Màu bề mặt cấp 3
     },
     border: {
-      primary: '#404040',
-      secondary: '#2d2d2d',
+      primary: '#5e5e5e', // Viền sáng rõ hơn
+      secondary: '#3a3a3c',
     },
   },
 } as const;

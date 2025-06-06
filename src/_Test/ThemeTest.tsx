@@ -2,6 +2,8 @@ import {
   Canvas,
   Circle,
   dist,
+  Image,
+  ImageShader,
   makeImageFromView,
   mix,
   SkImage,
@@ -26,6 +28,9 @@ import {
 
 const { width, height } = Dimensions.get('screen');
 const corners = [vec(0, 0), vec(width, 0), vec(width, height), vec(0, height)];
+const wait = async (number: number) => {
+  return await new Promise(resolve => setTimeout(resolve, number));
+};
 
 interface ColorScheme {
   active: boolean;
@@ -47,25 +52,19 @@ const defaultValue: ColorScheme = {
   overlay2: null,
   colorScheme: 'light',
 };
-const wait = async (ms: number) =>
-  new Promise(resolve => setTimeout(resolve, ms));
 
 const ColorSchemeContext = createContext<ColorSchemeContextP | null>(null);
 const ColorSchemeReducer = (_: ColorScheme, colorScheme: ColorScheme) => {
-  console.log('ColorScheme updated:', colorScheme);
   return colorScheme;
 };
 
 export const useColorScheme = () => {
-  console.log('useColorScheme called');
   const ctx = useContext(ColorSchemeContext);
-
   if (!ctx) {
     console.error('Context is null - component not wrapped in provider');
     throw new Error('useColorScheme must be used within ColorSchemeProvider');
   }
 
-  console.log('Context found:', ctx);
   const { dispatch, ref, colorScheme, circle, transition, active } = ctx;
   const newColorScheme = colorScheme === 'light' ? 'dark' : 'light';
 
@@ -73,21 +72,39 @@ export const useColorScheme = () => {
     console.log('Toggle started:', x, y, 'current scheme:', colorScheme);
     try {
       const overlay1 = await makeImageFromView(ref);
-      console.log('Overlay created:', overlay1);
 
       const r = Math.max(...corners.map(corner => dist(corner, { x, y })));
       circle.value = { x, y, r };
 
       dispatch({
         active: true,
-        overlay1: null,
+        overlay1,
         overlay2: null,
         colorScheme,
       });
+
+      await wait(16);
+      dispatch({
+        active: true,
+        overlay1,
+        overlay2: null,
+        colorScheme: newColorScheme,
+      });
+      await wait(16);
+
+      const overlay2 = await makeImageFromView(ref);
+
+      dispatch({
+        active: true,
+        overlay1,
+        overlay2,
+        colorScheme: newColorScheme,
+      });
+
       transition.value = 0;
       transition.value = withTiming(1, { duration: 650 });
-      // Use Promise-based setTimeout instead of callback
-      await wait(16);
+
+      await wait(1000);
 
       dispatch({
         active: false,
@@ -95,7 +112,6 @@ export const useColorScheme = () => {
         overlay2: null,
         colorScheme: newColorScheme,
       });
-      await new Promise(resolve => setTimeout(resolve, 2000));
     } catch (err) {
       console.error('Failed to make image from view:', err);
     }
@@ -123,20 +139,10 @@ export const ColorSchemeProvider = ({ children }: { children: ReactNode }) => {
     console.log('State changed:', {
       active,
       overlay1: !!overlay1,
+      overlay2: !!overlay2,
       colorScheme,
     });
-  }, [active, overlay1, colorScheme]);
-
-  const contextValue = {
-    dispatch,
-    active,
-    overlay1,
-    overlay2,
-    colorScheme,
-    ref,
-  };
-
-  console.log('Providing context value:', contextValue);
+  }, [active, overlay1, colorScheme, overlay2]);
 
   return (
     <View style={{ flex: 1 }}>
@@ -163,7 +169,20 @@ export const ColorSchemeProvider = ({ children }: { children: ReactNode }) => {
         pointerEvents="none"
       >
         <Canvas style={{ flex: 1 }}>
-          {overlay1 && <Circle c={circle} r={r} color="blue" />}
+          {overlay1 && <Image image={overlay1} width={width} height={height} />}
+
+          {overlay2 && (
+            <Circle c={circle} r={r}>
+              <ImageShader
+                image={overlay2}
+                x={0}
+                y={0}
+                width={width}
+                height={height}
+                fit="cover"
+              />
+            </Circle>
+          )}
         </Canvas>
       </View>
     </View>

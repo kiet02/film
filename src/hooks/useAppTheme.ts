@@ -6,8 +6,8 @@ import {
   getCustomColors,
   setCustomColors,
 } from '../utils/resource/color';
-import { useColorScheme } from '../_Test/ThemeTest';
-// import { useColorScheme } from '../ThemeProvider';
+
+import { useColorScheme } from '../ThemeProvider';
 
 type ColorValue = string;
 
