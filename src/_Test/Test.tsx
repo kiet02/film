@@ -4,11 +4,11 @@ import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Icon from '../element/AppIcon/item/Icon';
 import { View } from 'react-native';
 import { useAppTheme } from '../hooks/useAppTheme';
-import { useColorScheme } from '../ThemeProvider';
+import { useColorScheme } from './ThemeTest';
 
 export const ColorSchemeButton = () => {
   const { colors } = useAppTheme();
-  const { toggle, colorScheme, active } = useColorScheme();
+  const { toggle, active } = useColorScheme();
   const tap = Gesture.Tap()
     .runOnJS(true)
     .onStart(e => {
@@ -16,7 +16,6 @@ export const ColorSchemeButton = () => {
         toggle(e.absoluteX, e.absoluteY);
       }
     });
-  console.log(colors.background);
 
   return (
     <View
@@ -28,11 +27,8 @@ export const ColorSchemeButton = () => {
       }}
     >
       <GestureDetector gesture={tap}>
-        <Icon
-          name={colorScheme === 'light' ? 'Moon' : 'Sun'}
-          color={colors.text.primary}
-        />
-      </GestureDetector>{' '}
+        <Icon name={'Sun'} color={colors.text.primary} />
+      </GestureDetector>
     </View>
   );
 };

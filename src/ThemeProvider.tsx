@@ -167,7 +167,7 @@ export const ColorSchemeProvider = ({ children }: ColorSchemeProviderProps) => {
         </ColorSchemeContext.Provider>
       </View>
 
-      {active && (
+      {active && overlay1 && (
         <Canvas style={[StyleSheet.absoluteFill]} pointerEvents="none">
           <Image image={overlay1} x={0} y={0} width={width} height={height} />
 

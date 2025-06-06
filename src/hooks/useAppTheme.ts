@@ -6,12 +6,14 @@ import {
   getCustomColors,
   setCustomColors,
 } from '../utils/resource/color';
-import { useColorScheme } from '../ThemeProvider';
+import { useColorScheme } from '../_Test/ThemeTest';
+// import { useColorScheme } from '../ThemeProvider';
 
 type ColorValue = string;
 
 export const useAppTheme = () => {
   const { colorScheme } = useColorScheme();
+
   const [customColors, setCustomColorsState] = useState<CustomColors | null>(
     null
   );
