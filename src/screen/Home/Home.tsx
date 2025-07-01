@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, { useCallback, useRef } from 'react';
 import { BackHandler, ToastAndroid } from 'react-native';
 import { Categories } from './item/Categories';
@@ -8,11 +7,17 @@ import { ListExplore } from './item/ListExplore';
 import { HomeHeader } from './item/HomeHeader';
 import { useFocusEffect } from '@react-navigation/native';
 import { AppAreaView } from '../../element/AppAreaView/AppAreaView';
+import { FormProvider, useForm } from 'react-hook-form';
+import { Search } from '../Search/Search';
+
+type TSearch = { search?: string; modal?: boolean };
 
 export function HomeScreen() {
   const backPressCount = useRef(0);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
+  const method = useForm<TSearch>({
+    defaultValues: { search: '', modal: false },
+  });
   useFocusEffect(
     useCallback(() => {
       const onBackPress = () => {
@@ -44,30 +49,34 @@ export function HomeScreen() {
       };
     }, [])
   );
+  console.log(method.watch(), 'sss');
 
   return (
-    <AppAreaView style={{ justifyContent: 'center' }}>
-      <HomeHeader />
-      <AppText
-        styleText={{
-          fontSize: 30,
-          fontWeight: 'bold',
-          marginTop: Sizes.wpx(20),
-          marginLeft: Sizes.wpx(10),
-        }}
-        text="Categories"
-      />
-      <Categories />
-      <AppText
-        styleText={{
-          fontSize: 30,
-          fontWeight: 'bold',
-          marginTop: Sizes.wpx(20),
-          marginLeft: Sizes.wpx(10),
-        }}
-        text="Explore"
-      />
-      <ListExplore />
-    </AppAreaView>
+    <FormProvider {...method}>
+      <AppAreaView style={{ justifyContent: 'center' }}>
+        <HomeHeader control={method.control} />
+        <AppText
+          styleText={{
+            fontSize: 30,
+            fontWeight: 'bold',
+            marginTop: Sizes.wpx(20),
+            marginLeft: Sizes.wpx(10),
+          }}
+          text="Categories"
+        />
+        <Categories />
+        <AppText
+          styleText={{
+            fontSize: 30,
+            fontWeight: 'bold',
+            marginTop: Sizes.wpx(20),
+            marginLeft: Sizes.wpx(10),
+          }}
+          text="Explore"
+        />
+        <ListExplore />
+      </AppAreaView>
+      <Search />
+    </FormProvider>
   );
 }

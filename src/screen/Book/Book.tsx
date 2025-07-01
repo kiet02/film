@@ -6,7 +6,7 @@ import { BookHeader } from './item/BookHeader';
 import { BookInfo } from './item/BookInfo';
 import { AppAreaView } from '../../element/AppAreaView/AppAreaView';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { MainScreenParamList, RootStackScreenProps } from '../../utils';
+import { MainScreenParamList } from '../../utils';
 import { useBook } from './module/useBook';
 import { useLoader } from '../../element/AppLoad/LoaderContext';
 
@@ -35,9 +35,7 @@ export function Book() {
 
   return (
     <AppAreaView>
-      {/* Header */}
       <BookHeader />
-      {/* Book Cover and Info */}
       <View style={styles.bookInfo}>
         <Image
           source={{ uri: data?.img || 'https://picsum.photos/200/300' }}

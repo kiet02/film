@@ -1,6 +1,6 @@
-import { BlurMask, Canvas, Path, Skia } from '@shopify/react-native-skia';
+import { Canvas, Path, Skia } from '@shopify/react-native-skia';
 import React, { useMemo } from 'react';
-import { Modal, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -49,29 +49,24 @@ const CustomLoader = () => {
   }, []);
 
   return (
-    <Modal transparent animationType="fade" statusBarTranslucent>
-      {/* Layer mờ nền */}
+    <>
       <View style={StyleSheet.absoluteFill}>
         <View style={styles.blurBackground} />
-
-        {/* Layer loader không bị mờ */}
         <Animated.View style={[styles.loaderWrapper, animatedStyle]}>
           <Canvas style={{ width: CanvaSizeW, height: CanvaSizeW }}>
             <Path
               path={CirclePath}
-              color="blue"
+              color="yellow"
               style="stroke"
               strokeWidth={8}
               start={startValue}
               end={1}
               strokeCap="round"
-            >
-              <BlurMask blur={2} style="solid" />
-            </Path>
+            />
           </Canvas>
         </Animated.View>
       </View>
-    </Modal>
+    </>
   );
 };
 
